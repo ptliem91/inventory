@@ -10,20 +10,8 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <spring:url value="/css/bootstrap.css" var="bootstrapCSS"/>
-        <spring:url value="/css/font-awesome.css" var="fontawesomeCSS"/>
-        <spring:url value="/js/jquery.min.js" var="jqueryJS"/>
-        <spring:url value="/js/bootstrap.js" var="bootstrapJS"/>
-        <spring:url value="/js/angular.min.js" var="angularJS"/>
-        <spring:url value="/js/my_app.js" var="myAppJS"/>
-        <link rel="stylesheet" type="text/css" href="${bootstrapCSS}"/>
-        <link rel="stylesheet" type="text/css" href="${fontawesomeCSS}"/>
-        <script src="${jqueryJS}"></script>
-        <script src="${bootstrapJS}"></script>
-        <script src="${angularJS}"></script>
-        <script src="${myAppJS}"></script>
+        <%@ include file = "header.jsp" %>
+        <title>Home</title>
         <style type="text/css">
             .header, .message{
                 margin-bottom: 20px;
@@ -39,7 +27,7 @@
         <div class="container">
 
             <div class="col-md-12 header">
-                <h1 align="center"><a href="<%= request.getContextPath()%>/">Spring Inventory</a></h1>
+                <h1 align="center"><a href="<%= request.getContextPath()%>/">Perfect Perfume Inventory</a></h1>
             </div>
 
             <div class="col-md-12 menu">
@@ -77,9 +65,7 @@
                 </nav>
             </div>
 
-            <c:if test="${user_id == null}">    
-
-
+            <c:if test="${user_id == null}">
                 <div class="col-md-4 col-md-offset-4">
                     <div style="margin: 0 auto; width: 100%;">
                         <div class="panel panel-default">
@@ -114,8 +100,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </c:if>
 
             <c:if test="${user_id != null}">
@@ -278,10 +262,9 @@
             </c:if>         
 
             <div class="col-md-12" style="text-align: center; margin-top: 60px;">
-                &copy; Zubayer Ahamed
-                || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
+                &copy; Liem Pham
+                || <a href="https://www.youtube.com/" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/agaubun" target="_blank">Facebook</a>
             </div>
-
 
 
             <!-- checkoutModal -->
@@ -376,21 +359,7 @@
                 </div>
             </div>
 
-
         </div>
-
-
-
-
-       <%--  <div class="floating_div" style="text-align: center;width: 120px; height: 190px; border: 1px solid #DDD; box-shadow: 0px 0px 5px #DDD; position: fixed; right: 0px; bottom: 0px;">
-            <a href="http://www.facebook.com/zubayerahamed" target="_blank"><img src="<c:url value="/resources/img/zubayer.png"></c:url>" width="100%"/></a>
-            <br/>
-
-            Zubayer Ahamed <br/>
-            <a href="https://www.facebook.com/coderslabbd/" target="_blank"><i class="fa fa-facebook"></i> Facebook</a> <br/>
-            <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank"><i class="fa fa-youtube"></i> Youtube</a>
-
-        </div> --%>
 
 
     </body>

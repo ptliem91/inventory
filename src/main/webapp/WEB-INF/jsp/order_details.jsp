@@ -10,20 +10,8 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <spring:url value="/resources/css/bootstrap.css" var="bootstrapCSS"/>
-        <spring:url value="/resources/css/font-awesome.css" var="fontawesomeCSS"/>
-        <spring:url value="/resources/js/jquery.min.js" var="jqueryJS"/>
-        <spring:url value="/resources/js/bootstrap.js" var="bootstrapJS"/>
-        <spring:url value="/resources/js/angular.min.js" var="angularJS"/>
-        <spring:url value="/resources/js/my_app.js" var="myAppJS"/>
-        <link rel="stylesheet" type="text/css" href="${bootstrapCSS}"/>
-        <link rel="stylesheet" type="text/css" href="${fontawesomeCSS}"/>
-        <script src="${jqueryJS}"></script>
-        <script src="${bootstrapJS}"></script>
-        <script src="${angularJS}"></script>
-        <script src="${myAppJS}"></script>
+        <%@ include file = "header.jsp" %>
+        <title>Order Detail List</title>
         <style type="text/css">
             .header, .message{
                 margin-bottom: 20px;

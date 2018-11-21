@@ -25,6 +25,14 @@ public class ProductController {
         modelMap.addAttribute("em", request.getParameter("em"));
         return "product";
     }
+    
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public String getAllProducts(ModelMap modelMap, HttpServletRequest request) {
+        modelMap.addAttribute("products", productDao.getAllProduct());
+        modelMap.addAttribute("sm", request.getParameter("sm"));
+        modelMap.addAttribute("em", request.getParameter("em"));
+        return "products";
+    }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public String saveProduct(ModelMap modelMap, HttpServletRequest request) {
@@ -38,7 +46,7 @@ public class ProductController {
         } else {
             modelMap.addAttribute("em", "Product Info Not Saved");
         }
-        return "redirect:/product";
+        return "redirect:/products";
     }
 
     @RequestMapping(value = "/editProduct/{id}", method = RequestMethod.GET)
@@ -46,7 +54,7 @@ public class ProductController {
         Product product = productDao.getProduct(Integer.parseInt(id));
         modelMap.addAttribute("product", product);
         modelMap.addAttribute("products", productDao.getAllProduct());
-        return "product";
+        return "products";
     }
 
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
@@ -62,7 +70,7 @@ public class ProductController {
         } else {
             modelMap.addAttribute("em", "Product Info Not Update");
         }
-        return "redirect:/product";
+        return "redirect:/products";
     }
 
     @RequestMapping(value = "/deleteProduct/{id}", method = RequestMethod.GET)
@@ -73,7 +81,7 @@ public class ProductController {
         } else {
             modelMap.addAttribute("em", "Product Info Not Delete");
         }
-        return "redirect:/product";
+        return "redirect:/products";
     }
     
 }

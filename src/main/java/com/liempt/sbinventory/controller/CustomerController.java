@@ -23,6 +23,14 @@ public class CustomerController {
         modelMap.addAttribute("customers", customerDao.getAllCustomer());
         return "customer";
     }
+    
+    @RequestMapping(value = "/customers", method = RequestMethod.GET)
+    public String customerList(ModelMap modelMap, HttpServletRequest request) {
+        modelMap.addAttribute("sm", request.getParameter("sm"));
+        modelMap.addAttribute("em", request.getParameter("em"));
+        modelMap.addAttribute("customers", customerDao.getAllCustomer());
+        return "customers";
+    }
 
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
     public String saveCustomer(ModelMap modelMap, HttpServletRequest request) {
@@ -35,7 +43,7 @@ public class CustomerController {
         } else {
             modelMap.addAttribute("em", "Customer Info Not Saved");
         }
-        return "redirect:/customer";
+        return "redirect:/customers";
     }
 
     @RequestMapping(value = "/editCustomer/{id}", method = RequestMethod.GET)
@@ -43,7 +51,7 @@ public class CustomerController {
         Customer customer = customerDao.getCustomer(Integer.parseInt(id));
         modelMap.addAttribute("customer", customer);
         modelMap.addAttribute("customers", customerDao.getAllCustomer());
-        return "customer";
+        return "customers";
     }
 
     @RequestMapping(value = "/updateCustomer", method = RequestMethod.POST)
@@ -58,7 +66,7 @@ public class CustomerController {
         } else {
             modelMap.addAttribute("em", "Customer Info Not Update");
         }
-        return "redirect:/customer";
+        return "redirect:/customers";
     }
 
     @RequestMapping(value = "/deleteCustomer/{id}", method = RequestMethod.GET)
@@ -69,7 +77,7 @@ public class CustomerController {
         } else {
             modelMap.addAttribute("em", "Customer Info Not Deleted");
         }
-        return "redirect:/customer";
+        return "redirect:/customers";
     }
 
 }

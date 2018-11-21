@@ -10,16 +10,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <spring:url value="/resources/css/bootstrap.css" var="bootstrapCSS"/>
-        <spring:url value="/resources/css/font-awesome.css" var="fontawesomeCSS"/>
-        <spring:url value="/resources/js/jquery.min.js" var="jqueryJS"/>
-        <spring:url value="/resources/js/bootstrap.js" var="bootstrapJS"/>
-        <link rel="stylesheet" type="text/css" href="${bootstrapCSS}"/>
-        <link rel="stylesheet" type="text/css" href="${fontawesomeCSS}"/>
-        <script src="${jqueryJS}"></script>
-        <script src="${bootstrapJS}"></script>
+       <%@ include file = "header.jsp" %>
+        <title>Product List</title>
         <style type="text/css">
             .header, .message{
                 margin-bottom: 20px;
@@ -36,7 +28,7 @@
                 <% response.sendRedirect("http://localhost:8080/spring_inventory_jdbc/home");%>
             </c:if>
             <div class="col-md-12 header">
-                <h1 align="center"><a href="<%= request.getContextPath()%>/">Spring Inventory</a></h1>
+                <h1 align="center"><a href="<%= request.getContextPath()%>/">Perfect Perfume Inventory</a></h1>
             </div>
 
             <div class="col-md-12 menu">

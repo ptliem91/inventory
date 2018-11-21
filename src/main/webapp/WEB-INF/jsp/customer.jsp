@@ -10,24 +10,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <spring:url value="/resources/css/bootstrap.css" var="bootstrapCSS"/>
-        <spring:url value="/resources/css/font-awesome.css" var="fontawesomeCSS"/>
-        <spring:url value="/resources/js/jquery.min.js" var="jqueryJS"/>
-        <spring:url value="/resources/js/bootstrap.js" var="bootstrapJS"/>
-        <link rel="stylesheet" type="text/css" href="${bootstrapCSS}"/>
-        <link rel="stylesheet" type="text/css" href="${fontawesomeCSS}"/>
-        <script src="${jqueryJS}"></script>
-        <script src="${bootstrapJS}"></script>
+    	<%@ include file = "header.jsp" %>
+    	<title>Customer List</title>
         <style type="text/css">
-            .header, .message{
-                margin-bottom: 20px;
-            }
-            th, td{
-                text-align: center;
-            }
-        </style>
+			.header, .message {
+				margin-bottom: 20px;
+			}
+			
+			th, td {
+				text-align: center;
+			}
+		</style>
     </head>
     <body>
         <c:if test="${user_id == null}">
@@ -47,7 +40,7 @@
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                                <span class="icon-bar"></span> 
+                                <span class="icon-bar"></span>
                             </button>
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
