@@ -166,8 +166,7 @@
 				            </div>
 				            
                             <div class="col-md-12">
-                            
-                                <c:if test="${user_id != null}">
+                            	<div class="au-card">
 					                <div class="col-md-12">
 					
 					                    <div class="panel panel-default">
@@ -315,9 +314,8 @@
 					                        </div>
 					                    </div>
 					                </div>
-				
-					            </c:if>
-                            </div>                            
+                            </div>
+                            </div>                    
                         </div>
                         
                         <div class="row">

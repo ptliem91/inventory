@@ -56,7 +56,4 @@
     <script src="/template/js/main.js"></script>
     
     <script src="/resources/bootbox/js/custom-bootbox.js"></script>
-    
-    <!-- <script src="/template/vendor/angular-pagination/dirPagination.js"></script>
-	<spring:url value="/template/vendor/angular-pagination/dirPagination.tpl.html" var="pagingTemplate"/> -->
 
