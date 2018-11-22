@@ -39,7 +39,7 @@ public class OrderDao {
     }
 
     public List<Orders> getAllOrders() {
-        String sql = "select * from orders";
+        String sql = "select * from orders order by orderDate desc";
         return jdbcTemplate.query(sql, new OrderMapper());
     }
 

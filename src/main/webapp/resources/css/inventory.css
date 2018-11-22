@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-.navbar-default {
-	background-color: #69899f;
-	border-color: #425766;
-}
-
-.navbar-inverse {
-	background-color: #f8f8f8 !important;
-	border: none;
-}
-
-.navbar-inverse .navbar-nav > .active > a{
-	background-color: #82dce3 !important;
+.divPaging{
+	float: center;
 }

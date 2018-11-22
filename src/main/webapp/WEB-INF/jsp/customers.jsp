@@ -13,7 +13,7 @@
         <title>Product List</title>
     </head>
     
-    <body ng-controller="appCtrl">
+    <body>
 
         <div class="page-wrapper">
         <!-- HEADER MOBILE-->

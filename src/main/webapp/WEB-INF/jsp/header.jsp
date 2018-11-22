@@ -2,11 +2,12 @@
 
 <!-- <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css" /> -->
 <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
-<!-- <link rel="stylesheet" type="text/css" href="/resources/css/inventory.css" /> -->
+<link rel="stylesheet" type="text/css" href="/resources/css/inventory.css" />
 
 <!-- <script src="/resources/js/jquery.min.js"></script> -->
 <!-- <script src="/resources/js/bootstrap.js"></script> -->
-<script src="/resources/js/angular.min.js"></script>
+<!-- <script src="/resources/js/angular.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
 <script src="/resources/js/my_app.js"></script> 
 
  <!-- Fontfaces CSS-->
@@ -16,7 +17,7 @@
     <link href="/template/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="/template/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/template/vendor/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
     <link href="/template/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
@@ -33,8 +34,8 @@
 	<!-- Jquery JS-->
     <script src="/template/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="/template/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="/template/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="/template/vendor/bootstrap-4.1.3/js/popper.min.js"></script>
+    <script src="/template/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
     <script src="/template/vendor/slick/slick.min.js">
     </script>
@@ -55,4 +56,7 @@
     <script src="/template/js/main.js"></script>
     
     <script src="/resources/bootbox/js/custom-bootbox.js"></script>
+    
+    <!-- <script src="/template/vendor/angular-pagination/dirPagination.js"></script>
+	<spring:url value="/template/vendor/angular-pagination/dirPagination.tpl.html" var="pagingTemplate"/> -->
 

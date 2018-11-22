@@ -1,7 +1,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
 	<div class="logo">
 		<a href="#"> <img src="template/images/icon/logo.png"
-			alt="Cool Admin" />
+			alt="Perfect Perfume" />
 		</a>
 	</div>
 	<div class="menu-sidebar__content js-scrollbar1">
@@ -23,7 +23,13 @@
 					<a href="<%= request.getContextPath()%>/customers"><i class="fas fa-chart-bar"></i> Customer</a>
 				</li>
 				<li>
-					<a href="chart.html"> <i class="fas fa-chart-bar"></i>Charts</a>
+					<a href="<%= request.getContextPath()%>/order_detail"><i class="fas fa-chart-bar"></i> Order Detail</a>
+				</li>
+				<li>
+					<a href="<%= request.getContextPath()%>/order_add"><i class="fas fa-chart-bar"></i> Add Order</a>
+				</li>
+				<li>
+					<a href="<%= request.getContextPath()%>/logout"><i class="fas fa-arrow-circle-left"></i> LogOut</a>
 				</li>
 			</ul>
 		</nav>

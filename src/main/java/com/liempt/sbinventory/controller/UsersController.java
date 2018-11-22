@@ -27,11 +27,12 @@ public class UsersController {
         HttpSession session = request.getSession();
         if(u != null){
             session.setAttribute("user_id", u.getUserId());
+            return "home";
         }else{
             modelMap.addAttribute("em", "User Not Found, try again");
+            return "index";
         }
         
-        return "redirect:/";
         
     }
     

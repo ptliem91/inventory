@@ -70,7 +70,7 @@
 
   var defaults = {
     // default language
-    locale: "ja",
+    locale: "en",
     // show backdrop or not. Default to static so user has to interact with dialog
     backdrop: "static",
     // animate the modal in/out
@@ -885,7 +885,7 @@
     },
     ja : {
       OK      : "OK",
-      CANCEL  : "キャンセル",
+      CANCEL  : "Cancel",
       CONFIRM : "OK"
     },
     lt : {
