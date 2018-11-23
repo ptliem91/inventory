@@ -147,6 +147,8 @@
         	</div>
         </div>
     
+    <%@ include file = "footer.jsp" %>    
+    
     <script type="text/javascript">
 		$(document).on("click", "[id^='del_']", function() {
 			let id = $(this).attr('id').split('_')[1];
