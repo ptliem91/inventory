@@ -1,37 +1,56 @@
-<aside class="menu-sidebar d-none d-lg-block">
-	<div class="logo">
-		<a href="<%= request.getContextPath()%>/">
-			<h3 style="color: #ff4dd2;">Perfect Perfume</h3>
-		</a>
-	</div>
-	<div class="menu-sidebar__content js-scrollbar1">
-		<nav class="navbar-sidebar">
-			<ul class="list-unstyled navbar__list">
-				<li class="active has-sub">
-					<a class="js-arrow" href="<%= request.getContextPath()%>/"> 
-						<i class="fas fa-tachometer-alt"></i>
-						Dashboard
-					</a>
-						<ul class="list-unstyled navbar__sub-list js-sub-list">
-							<li><a href="index.html">Dashboard 1</a></li>
-						</ul>
-				</li>
-				<li>
-					<a href="<%= request.getContextPath()%>/products"><i class="fas fa-truck"></i> Product</a>
-				</li>
-				<li>
-					<a href="<%= request.getContextPath()%>/customers"><i class="fa fa-users"></i> Customer</a>
-				</li>
-				<li>
-					<a href="<%= request.getContextPath()%>/order_detail"><i class="fas fa-chart-bar"></i> Order Detail</a>
-				</li>
-				<li>
-					<a href="<%= request.getContextPath()%>/order_add"><i class="fas fa-shopping-cart"></i> Add Order</a>
-				</li>
-				<li>
-					<a href="<%= request.getContextPath()%>/logout"><i class="fas fa-arrow-circle-left"></i> LogOut</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</aside>
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/">SB Admin v2.0</a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="<%=request.getContextPath()%>/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="<%=request.getContextPath()%>/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        
+                        <li><a href="<%=request.getContextPath()%>/products"><i class="fas fa-truck"></i> Product</a></li>
+						<li><a href="<%=request.getContextPath()%>/customers"><i class="fa fa-users"></i> Customer</a></li>
+						<li><a href="<%=request.getContextPath()%>/order_detail"><i class="fas fa-chart-bar"></i> Order Detail</a></li>
+						<li><a href="<%=request.getContextPath()%>/order_add"><i class="fas fa-shopping-cart"></i> Add Order</a></li>
+						<li><a href="<%=request.getContextPath()%>/logout"><i class="fas fa-arrow-circle-left"></i> LogOut</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>

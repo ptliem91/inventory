@@ -19,7 +19,7 @@
 								</div>
 								<div class="mess__item">
 									<div class="image img-cir img-40">
-										<img src="template/images/icon/avatar-06.jpg"
+										<img src=""
 											alt="Michelle Moreno" />
 									</div>
 									<div class="content">
@@ -30,7 +30,7 @@
 								</div>
 								<div class="mess__item">
 									<div class="image img-cir img-40">
-										<img src="template/images/icon/avatar-04.jpg"
+										<img src=""
 											alt="Diane Myers" />
 									</div>
 									<div class="content">
@@ -52,7 +52,7 @@
 								</div>
 								<div class="email__item">
 									<div class="image img-cir img-40">
-										<img src="template/images/icon/avatar-06.jpg"
+										<img src=""
 											alt="Cynthia Harvey" />
 									</div>
 									<div class="content">
@@ -62,7 +62,7 @@
 								</div>
 								<div class="email__item">
 									<div class="image img-cir img-40">
-										<img src="template/images/icon/avatar-05.jpg"
+										<img src=""
 											alt="Cynthia Harvey" />
 									</div>
 									<div class="content">
@@ -72,7 +72,7 @@
 								</div>
 								<div class="email__item">
 									<div class="image img-cir img-40">
-										<img src="template/images/icon/avatar-04.jpg"
+										<img src=""
 											alt="Cynthia Harvey" />
 									</div>
 									<div class="content">
@@ -127,7 +127,7 @@
 					<div class="account-wrap">
 						<div class="account-item clearfix js-item-menu">
 							<div class="image">
-								<img src="template/images/icon/avatar-01.jpg" alt="John Doe" />
+								<img src="" alt="John Doe" />
 							</div>
 							<div class="content">
 								<a class="js-acc-btn" href="#">john doe</a>
@@ -135,7 +135,7 @@
 							<div class="account-dropdown js-dropdown">
 								<div class="info clearfix">
 									<div class="image">
-										<a href="#"> <img src="template/images/icon/avatar-01.jpg"
+										<a href="#"> <img src=""
 											alt="John Doe" />
 										</a>
 									</div>

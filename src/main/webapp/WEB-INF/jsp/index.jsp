@@ -28,7 +28,7 @@
 
 						<div class="panel-body">
 							<c:if test="${em != null}">
-								<div class="alert alert-danger alert-dismissable fade in">
+								<div class="alert alert-danger alert-dismissable">
 									<a href="#" class="close" data-dismiss="alert"
 										aria-label="close">&times;</a> <strong>Error!</strong> ${em}
 								</div>

@@ -146,9 +146,9 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        
-                        <div class="row">
+                    <div class="container-fluid au-card">
+                        <h5 class="heading-title">Add Order</h5>
+
                         	<div class="col-md-12 message">
 				                <c:if test="${sm != null}">
 				                    <div class="alert alert-success alert-dismissable fade in">
@@ -166,66 +166,69 @@
 				            </div>
 				            
                             <div class="col-md-12">
-                            	<div class="au-card">
-					                <div class="col-md-12">
-					
-					                    <div class="panel panel-default">
-					                        <div class="panel-heading">
-					
-					                        </div>
-					                        <div class="panel-body">
-					                            <div class="col-md-4">
-					                                Order No: <input name="oid" type="text" class="form-control" ng-model="oid = ${orderNo}" value="${orderNo}"/>
-					                            </div>
-					                            <div class="col-md-4">
-					                                Order Type: 
+					              <div class="row">					
+					                   	<div class="col">
+							                <section>
+							                  <div class="card-body text-secondary">
+							                  	Order No <input name="oid" type="text" class="form-control" ng-model="oid = ${orderNo}" value="${orderNo}"/>
+							                  </div>
+							                </section>
+							             </div>
+							             <div class="col">
+							                <section>
+							                  <div class="card-body text-secondary">
+							                  	Order Type
 					                                <div class="radio">
 					                                    <label>
-					                                        <input type="radio" name="orderType" ng-model="orderType" value="sell">Sell
+					                                        <input type="radio" name="orderType" ng-model="orderType" value="sell"> Sell
 					                                    </label> &nbsp; &nbsp; &nbsp;
 					                                    <label>
-					                                        <input type="radio" name="orderType" ng-model="orderType" value="purchase">Purchase
+					                                        <input type="radio" name="orderType" ng-model="orderType" value="purchase"> Purchase
 					                                    </label>
 					                                </div>
-					                            </div>
-					                            <div class="col-md-4">
-					                                Order Date: <input ng-model="orderDate" name="orderDate" type="date" class="form-control"/>
-					                            </div>
-					                        </div>
-					                    </div>
+							                  </div>
+							                </section>
+							             </div>
+							             <div class="col">
+							                <section>
+							                  <div class="card-body text-secondary">
+							                   Order Date: <input ng-model="orderDate" name="orderDate" type="date" class="form-control"/>
+							                  </div>
+							                </section>
+							              </div>		                    
 					                </div>
 					
-					                <div class="col-md-12">
-					                    <div class="row">
-					                        <div class="col-md-4" style="height: 360px;">
+					                <div class="row">
+					                     <div class="col-md-4" style="height: 360px;">
 					                            <div class="panel panel-primary" style="height: 100%">
-					                                <div class="panel-heading">
-					                                    <i class="fa fa-product-hunt"></i> Select Product
+					                                <div class="panel-heading" style="text-align: center;">
+					                                    <i class="fa fa-truck"></i> Select Product
 					                                </div>
 					                                <div class="panel-body">
 					                                    <div class="form-group">
-					                                        <label for="Product Name">Product Name:</label>
+					                                        <label for="Product Name">Product Name</label>
 					                                        <select name="pname" class="form-control" ng-model="clickedProduct" ng-options="product.pname for product in products">
 					                                        </select>
 					                                    </div>
 					                                    <div class="form-group">
-					                                        <label for="pid">Product ID: </label>
+					                                        <label for="pid">Product ID </label>
 					                                        <input readonly="1" name="pid" type="text" class="form-control" id="pid" value="{{clickedProduct.pid}}">
 					                                    </div>
 					                                    <div class="form-group">
-					                                        <label for="price">Price: </label>
+					                                        <label for="price">Price </label>
 					                                        <input readonly="1" name="price" type="text" class="form-control" id="price" value="{{clickedProduct.price}}">
 					                                    </div>
 					                                    <div class="form-group">
-					                                        <label for="qty">Stock: </label>
+					                                        <label for="qty">Stock </label>
 					                                        <input readonly="1" name="qty" type="text" class="form-control" id="qty" value="{{clickedProduct.qty}}">
 					                                    </div>
 					                                </div>
 					                            </div>
 					                        </div>
+					                        
 					                        <div class="col-md-4" style="height: 360px;">
 					                            <div class="panel panel-primary" style="height: 100%">
-					                                <div class="panel-heading">
+					                                <div class="panel-heading" style="text-align: center;">
 					                                    <i class="fa fa-user-circle"></i> Select Customer
 					                                </div>
 					                                <div class="panel-body">
@@ -245,10 +248,12 @@
 					                                </div>
 					                            </div>
 					                        </div>
-					                        <div class="col-md-4" style="height: 360px;">
-					                            <div class="panel panel-primary" style="height: 100%">
+					                </div>
+					                
+					                <div class="col-md-4" style="margin-top: 30px;">
+					                	<div class="panel panel-primary" style="height: 100%">
 					                                <div class="panel-heading">
-					                                    <i class="fa fa-sellsy"></i> Order Details
+					                                    <i class="fa fa-chart-bar"></i> Order Details
 					                                </div>
 					                                <div class="panel-body">
 					                                    <div class="form-group" ng-show="clickedProduct.pid != null">
@@ -263,18 +268,15 @@
 					                                        <button ng-click="addToCart()" type="submit" class="btn btn-success"><i class="fa fa-cart-plus"></i> Add To Cart</button>
 					                                    </div>
 					                                </div>
-					                            </div>
-					                        </div>
-					                    </div>
-					                </div>
+					                	</div>
+					               	</div>
 					
 					                <div class="col-md-12" style="text-align: center; margin-top: 20px;">
-					                    <div class="panel panel-success">
-					                        <div class="panel-heading">
+					                        <div class="panel-heading" style="margin-bottom: 20px;">
 					                            <h3><i class="fa fa-cart-plus"></i> Cart <button class="btn btn-sm btn-success"> {{cartProduct.length}} </button></h3>
 					                        </div>
-					                        <div class="panel-body">
-					                            <table class="table table-bordered table-striped table-responsive">
+					                        <div class="table-responsive table--no-card m-b-30">
+					                            <table class="table table-borderless table-striped table-earning">
 					                                <thead>
 					                                    <tr>
 					                                        <th>S.No</th>
@@ -312,10 +314,8 @@
 					                                </tfoot>
 					                            </table>
 					                        </div>
-					                    </div>
 					                </div>
-                            </div>
-                            </div>                    
+                            </div>                   
                         </div>
                         
                         <div class="row">
@@ -337,8 +337,8 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title" align="center"><i class="fa fa-eye"></i> Review Your Order</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
                             <table class="table table-bordered table-striped">
@@ -396,7 +396,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- Modal -->
             <div id="messageModal" class="modal fade" role="dialog">
