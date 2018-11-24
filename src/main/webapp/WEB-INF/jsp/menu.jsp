@@ -2,13 +2,10 @@
 	<div class="main-navbar">
 		<nav
 			class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-			<a class="navbar-brand w-100 mr-0" href="#"
+			<a class="navbar-brand w-100 mr-0" href="<%=request.getContextPath()%>/"
 				style="line-height: 25px;">
-				<div class="d-table m-auto">
-					<img id="main-logo" class="d-inline-block align-top mr-1"
-						style="max-width: 25px;" src="images/shards-dashboards-logo.svg"
-						alt="Shards Dashboard"> <span
-						class="d-none d-md-inline ml-1">Shards Dashboard</span>
+				<div class="d-table m-auto"><span
+						class="d-none d-md-inline ml-1">Liti Perfume Inventory</span>
 				</div>
 			</a> <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none"> <i
 				class="material-icons">&#xE5C4;</i>
@@ -29,10 +26,6 @@
 	</form>
 	<div class="nav-wrapper">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link active"
-				href="<%=request.getContextPath()%>/"> <i class="material-icons">edit</i>
-					<span>Blog Dashboard</span>
-			</a></li>
 			<li class="nav-item"><a class="nav-link "
 				href="<%=request.getContextPath()%>/products"> <i
 					class="fa fa-truck"></i> <span>Product</span>
