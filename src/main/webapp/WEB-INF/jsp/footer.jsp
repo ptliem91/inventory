@@ -1,6 +1,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-<script src="resources/js/my_app.js"></script>
+<script src="/resources/js/my_app.js"></script>
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -25,10 +25,10 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
 	
-<script src="theme/scripts/extras.1.1.0.min.js"></script>
+<script src="/theme/scripts/extras.1.1.0.min.js"></script>
 
-<script src="theme/scripts/shards-dashboards.1.1.0.min.js"></script>
+<script src="/theme/scripts/shards-dashboards.1.1.0.min.js"></script>
 
-<script src="theme/scripts/app/app-blog-overview.1.1.0.js"></script>
+<script src="/theme/scripts/app/app-blog-overview.1.1.0.js"></script>
 
-<script src="resources/bootbox/js/custom-bootbox.js"></script>
+<script src="/resources/bootbox/js/custom-bootbox.js"></script>

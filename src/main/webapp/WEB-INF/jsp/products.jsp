@@ -99,7 +99,7 @@
 									<button type="submit" class="btn btn-warning">
 										<i class="fa fa-edit"></i> Update
 									</button>
-									<a href="<%=request.getContextPath()%>/product"
+									<a href="<%=request.getContextPath()%>/products"
 										class="btn btn-primary pull-right"><i
 										class="fa fa-user-plus"></i> New</a>
 								</c:if>
@@ -181,6 +181,6 @@
 			});
 		});
 	</script>
-
+	
 </body>
 </html>
