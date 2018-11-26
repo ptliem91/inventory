@@ -1,47 +1,63 @@
 package com.liempt.sbinventory.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "customer")
 public class Customer {
 
-    private int cid;
-    private String cname;
-    private String phone;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cid", nullable = false)
+	private int cid;
 
-    public Customer() {
-    }
+	@Column
+	private String cname;
 
-    public Customer(int cid, String cname, String phone) {
-        this.cid = cid;
-        this.cname = cname;
-        this.phone = phone;
-    }
+	@Column
+	private String phone;
 
-    public int getCid() {
-        return cid;
-    }
+	public Customer() {
+	}
 
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
+	public Customer(int cid, String cname, String phone) {
+		this.cid = cid;
+		this.cname = cname;
+		this.phone = phone;
+	}
 
-    public String getCname() {
-        return cname;
-    }
+	public int getCid() {
+		return cid;
+	}
 
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getCname() {
+		return cname;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 
-    @Override
-    public String toString() {
-        return "Customer{" + "cid=" + cid + ", cname=" + cname + ", phone=" + phone + '}';
-    }
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer{" + "cid=" + cid + ", cname=" + cname + ", phone=" + phone + '}';
+	}
 
 }

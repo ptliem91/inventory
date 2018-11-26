@@ -1,17 +1,16 @@
 package com.liempt.sbinventory.restcontroller;
 
-import com.liempt.sbinventory.dao.ProductDao;
-import com.liempt.sbinventory.entity.Product;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.liempt.sbinventory.dao.ProductDao;
+import com.liempt.sbinventory.entity.Product;
 
 @RestController
 @RequestMapping("/products")
@@ -22,13 +21,13 @@ public class ProductRestController {
 
     @RequestMapping(value = "/allProduct", method = RequestMethod.GET, headers = "Accept=application/json")
     public List<Product> getAllProduct() {
-        List<Product> listProduct = productDao.getAllProduct();
+        List<Product> listProduct = productDao.getAllProducts();
         return listProduct;
     }
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public Product getProduct(@PathVariable("id") String id) {
-        Product product = productDao.getProduct(Integer.parseInt(id));
+        Product product = productDao.findById(Integer.parseInt(id));
         return product;
     }
 

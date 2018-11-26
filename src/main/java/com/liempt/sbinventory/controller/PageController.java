@@ -49,10 +49,16 @@ public class PageController {
 		return "order_detail";
 	}
 
+	/**
+	 * Get data for Add order page
+	 * @param modelMap
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/order_add", method = RequestMethod.GET)
 	public String orderAddPage(ModelMap modelMap, HttpServletRequest request) {
 		modelMap.addAttribute("orderNo", orderDao.getOrderNo());
-		modelMap.addAttribute("products", productDao.getAllProduct());
+		modelMap.addAttribute("products", productDao.getAllProducts());
 		modelMap.addAttribute("customers", customerDao.getAllCustomer());
 		modelMap.addAttribute("em", request.getParameter("em"));
 		return "order_add";

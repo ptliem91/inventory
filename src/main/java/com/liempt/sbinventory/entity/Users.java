@@ -1,47 +1,63 @@
 package com.liempt.sbinventory.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class Users {
 
-    private int userId;
-    private String userName;
-    private String password;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userid", nullable = false)
+	private int userId;
 
-    public Users() {
-    }
+	@Column(name = "username")
+	private String userName;
 
-    public Users(int userId, String userName, String password) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-    }
+	@Column
+	private String password;
 
-    public int getUserId() {
-        return userId;
-    }
+	public Users() {
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public Users(int userId, String userName, String password) {
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public int getUserId() {
+		return userId;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    @Override
-    public String toString() {
-        return "Users{" + "userId=" + userId + ", userName=" + userName + ", password=" + password + '}';
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Users{" + "userId=" + userId + ", userName=" + userName + ", password=" + password + '}';
+	}
 
 }

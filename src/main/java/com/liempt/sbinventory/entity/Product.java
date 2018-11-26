@@ -1,57 +1,75 @@
 package com.liempt.sbinventory.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "product")
 public class Product {
 
-    private int pid;
-    private String pname;
-    private double price;
-    private int qty;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "pid", nullable = false)
+	private int pid;
 
-    public Product() {
-    }
+	@Column
+	private String pname;
 
-    public Product(int pid, String pname, double price, int qty) {
-        this.pid = pid;
-        this.pname = pname;
-        this.price = price;
-        this.qty = qty;
-    }
+	@Column
+	private double price;
 
-    public int getPid() {
-        return pid;
-    }
+	@Column
+	private int qty;
 
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
+	public Product() {
+	}
 
-    public String getPname() {
-        return pname;
-    }
+	public Product(int pid, String pname, double price, int qty) {
+		this.pid = pid;
+		this.pname = pname;
+		this.price = price;
+		this.qty = qty;
+	}
 
-    public void setPname(String pname) {
-        this.pname = pname;
-    }
+	public int getPid() {
+		return pid;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public String getPname() {
+		return pname;
+	}
 
-    public int getQty() {
-        return qty;
-    }
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
 
-    public void setQty(int qty) {
-        this.qty = qty;
-    }
+	public double getPrice() {
+		return price;
+	}
 
-    @Override
-    public String toString() {
-        return "Product{" + "pid=" + pid + ", pname=" + pname + ", price=" + price + ", qty=" + qty + '}';
-    }
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+	@Override
+	public String toString() {
+		return "Product{" + "pid=" + pid + ", pname=" + pname + ", price=" + price + ", qty=" + qty + '}';
+	}
 
 }

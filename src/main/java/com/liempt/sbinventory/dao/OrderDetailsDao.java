@@ -1,66 +1,75 @@
 package com.liempt.sbinventory.dao;
 
-import com.liempt.sbinventory.entity.OrderDetails;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.liempt.sbinventory.entity.OrderDetails;
 
 @Repository
+@Transactional
 public class OrderDetailsDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private EntityManager entityManager;
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
+//    private DataSource dataSource;
+//    private JdbcTemplate jdbcTemplate;
+//
+//    public DataSource getDataSource() {
+//        return dataSource;
+//    }
+//
+//    @Autowired
+//    public void setDataSource(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//        this.jdbcTemplate = new JdbcTemplate(dataSource);
+//    }
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-    
-    public List<OrderDetails> getAllOrderDetails(){
-        String sql = "select * from orderdetails";
-        return jdbcTemplate.query(sql, new ODRowMapper());
-    }
-    
-    public List<OrderDetails> getAllOrderDetailsByOrderID(int oid){
-        String sql = "select * from orderdetails where oid=?";
-        return jdbcTemplate.query(sql, new Object[]{oid}, new ODRowMapper());
-    }
-    private static class ODRowMapper implements RowMapper<OrderDetails>{
+	@SuppressWarnings("unchecked")
+	public List<OrderDetails> getAllOrderDetails() {
+		String sql = "Select new " + OrderDetails.class.getName() //
+				+ "(e.odid, e.oid, e.pid, e.price, e.qty) " //
+				+ " from " + OrderDetails.class.getName() + " e ";
 
-        @Override
-        public OrderDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
-            OrderDetails o = new OrderDetails();
-            o.setOdid(rs.getInt("odid"));
-            o.setOid(rs.getInt("oid"));
-            o.setPid(rs.getInt("pid"));
-            o.setPrice(rs.getDouble("price"));
-            o.setQty(rs.getInt("qty"));
-            return o;
-        }
-        
-    }
-    
-    public boolean saveOrderDetails(OrderDetails orderDetails) {
-        String sql = "insert into orderdetails (oid, pid, price, qty) values (?, ?, ?, ?)";
+		Query query = entityManager.createQuery(sql, OrderDetails.class);
+		return query.getResultList();
+	}
 
-        int value = jdbcTemplate.update(sql, new Object[]{orderDetails.getOid(), orderDetails.getPid(), orderDetails.getPrice(), orderDetails.getQty()});
+	@SuppressWarnings("unchecked")
+	public List<OrderDetails> getAllOrderDetailsByOrderID(int oid) {
+		String sql = "Select new " + OrderDetails.class.getName() //
+				+ "(e.odid, e.oid, e.pid, e.price, e.qty) " //
+				+ " from " + OrderDetails.class.getName() + " e " + " where oid = ? ";
 
-        if (value > 0) {
-            return true;
-        }
+		Query query = entityManager.createQuery(sql, OrderDetails.class);
+		query.setParameter(0, oid);
 
-        return false;
-    }
-    
-    
+		return query.getResultList();
+	}
+
+//	private static class ODRowMapper implements RowMapper<OrderDetails> {
+//
+//		@Override
+//		public OrderDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
+//			OrderDetails o = new OrderDetails();
+//			o.setOdid(rs.getInt("odid"));
+//			o.setOid(rs.getInt("oid"));
+//			o.setPid(rs.getInt("pid"));
+//			o.setPrice(rs.getDouble("price"));
+//			o.setQty(rs.getInt("qty"));
+//			return o;
+//		}
+//
+//	}
+
+	public void saveOrderDetails(OrderDetails orderDetails) {
+		entityManager.persist(orderDetails);
+	}
+
 }

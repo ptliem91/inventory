@@ -1,91 +1,114 @@
 package com.liempt.sbinventory.dao;
 
-import com.liempt.sbinventory.entity.Product;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.liempt.sbinventory.entity.Product;
 
 @Repository
+@Transactional
 public class ProductDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private EntityManager entityManager;
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
+//	private DataSource dataSource;
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+//	private JdbcTemplate jdbcTemplate;
 
-    public List<Product> getAllProduct() {
-        String sql = "select * from product";
-        return jdbcTemplate.query(sql, new ProductMapper());
-    }
+//	public DataSource getDataSource() {
+//		return dataSource;
+//	}
 
-    public Product getProduct(int id) {
-        String sql = "select * from product where pid=?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProductMapper());
-    }
+	/**
+	 * Find by primary key (id)
+	 * 
+	 * @param id
+	 * @return A product
+	 */
+	public Product findById(int id) {
+		return this.entityManager.find(Product.class, id);
+	}
 
-    public static class ProductMapper implements RowMapper<Product> {
+	/**
+	 * Get all products
+	 * 
+	 * @return product list
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Product> getAllProducts() {
+		String sql = "Select new " + Product.class.getName() //
+				+ "(e.pid, e.pname, e.price, e.qty) " //
+				+ " from " + Product.class.getName() + " e ";
 
-        @Override
-        public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Product product = new Product();
-            product.setPid(rs.getInt("pid"));
-            product.setPname(rs.getString("pname"));
-            product.setPrice(rs.getDouble("price"));
-            product.setQty(rs.getInt("qty"));
-            return product;
-        }
+		Query query = entityManager.createQuery(sql, Product.class);
+		return query.getResultList();
+	}
 
-    }
+//	@Autowired
+//	public void setDataSource(DataSource dataSource) {
+//		this.dataSource = dataSource;
+//		this.jdbcTemplate = new JdbcTemplate(dataSource);
+//	}
 
-    public boolean saveProduct(Product product) {
-        String sql = "insert into product (pname, price, qty) values (?, ?, ?)";
+//	public List<Product> getAllProduct() {
+//		String sql = "select * from product";
+//		return jdbcTemplate.query(sql, new ProductMapper());
+//	}
 
-        int value = jdbcTemplate.update(sql, new Object[]{product.getPname(), product.getPrice(), product.getQty()});
+//	public Product getProduct(int id) {
+//		String sql = "select * from product where pid=?";
+//		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new ProductMapper());
+//	}
 
-        if (value > 0) {
-            return true;
-        }
+//	public static class ProductMapper implements RowMapper<Product> {
+//
+//		@Override
+//		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+//			Product product = new Product();
+//			product.setPid(rs.getInt("pid"));
+//			product.setPname(rs.getString("pname"));
+//			product.setPrice(rs.getDouble("price"));
+//			product.setQty(rs.getInt("qty"));
+//			return product;
+//		}
+//
+//	}
 
-        return false;
-    }
+	/**
+	 * Create new a Product
+	 * 
+	 * @param product
+	 */
+	public void saveProduct(Product product) {
+		entityManager.persist(product);
+	}
 
-    public boolean updateProduct(Product product) {
-        String sql = "update product set pname=?, price=?, qty=? where pid=?";
+	/**
+	 * Update the Product
+	 * 
+	 * @param product
+	 */
+	public void updateProduct(Product product) {
+		entityManager.merge(product);
+	}
 
-        int value = jdbcTemplate.update(sql, new Object[]{product.getPname(), product.getPrice(), product.getQty(), product.getPid()});
-
-        if (value > 0) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean deleteProduct(int id) {
-        String sql = "delete from product where pid=?";
-
-        int value = jdbcTemplate.update(sql, new Object[]{id});
-
-        if (value > 0) {
-            return true;
-        }
-
-        return false;
-    }
-    
-    
+	/**
+	 * Delete the product
+	 * 
+	 * @param id
+	 */
+	public void deleteProduct(int id) {
+		Product productRemove = findById(id);
+		if (productRemove != null) {
+			entityManager.remove(productRemove);
+		}
+	}
 
 }

@@ -1,67 +1,88 @@
 package com.liempt.sbinventory.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "orderdetails")
 public class OrderDetails {
 
-    private int odid;
-    private int oid;
-    private int pid;
-    private double price;
-    private int qty;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "odid", nullable = false)
+	private int odid;
 
-    public OrderDetails() {
-    }
+	@Column
+	private int oid;
 
-    public OrderDetails(int odid, int oid, int pid, double price, int qty) {
-        this.odid = odid;
-        this.oid = oid;
-        this.pid = pid;
-        this.price = price;
-        this.qty = qty;
-    }
+	@Column
+	private int pid;
 
-    public int getOdid() {
-        return odid;
-    }
+	@Column
+	private double price;
 
-    public void setOdid(int odid) {
-        this.odid = odid;
-    }
+	@Column
+	private int qty;
 
-    public int getOid() {
-        return oid;
-    }
+	public OrderDetails() {
+	}
 
-    public void setOid(int oid) {
-        this.oid = oid;
-    }
+	public OrderDetails(int odid, int oid, int pid, double price, int qty) {
+		this.odid = odid;
+		this.oid = oid;
+		this.pid = pid;
+		this.price = price;
+		this.qty = qty;
+	}
 
-    public int getPid() {
-        return pid;
-    }
+	public int getOdid() {
+		return odid;
+	}
 
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
+	public void setOdid(int odid) {
+		this.odid = odid;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public int getOid() {
+		return oid;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
 
-    public int getQty() {
-        return qty;
-    }
+	public int getPid() {
+		return pid;
+	}
 
-    public void setQty(int qty) {
-        this.qty = qty;
-    }
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
 
-    @Override
-    public String toString() {
-        return "OrderDetails{" + "odid=" + odid + ", oid=" + oid + ", pid=" + pid + ", price=" + price + ", qty=" + qty + '}';
-    }
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderDetails{" + "odid=" + odid + ", oid=" + oid + ", pid=" + pid + ", price=" + price + ", qty=" + qty
+				+ '}';
+	}
 
 }

@@ -1,55 +1,62 @@
 package com.liempt.sbinventory.dao;
 
-import com.liempt.sbinventory.entity.Users;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.liempt.sbinventory.entity.Users;
 
 @Repository
+@Transactional
 public class UsersDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private EntityManager entityManager;
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
+//    private DataSource dataSource;
+//    private JdbcTemplate jdbcTemplate;
+//
+//    public DataSource getDataSource() {
+//        return dataSource;
+//    }
+//
+//    @Autowired
+//    public void setDataSource(DataSource dataSource) {
+//        this.jdbcTemplate = new JdbcTemplate(dataSource);
+//        this.dataSource = dataSource;
+//    }
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.dataSource = dataSource;
-    }
+	public Users getUser(String userName, String password) {
+		String sql = "Select new " + Users.class.getName() //
+				+ "(e.userId, e.userName, e.password) " //
+				+ " from " + Users.class.getName() + " e " + " where userName = ? and password = ? ";
 
-    public Users getUser(String userName, String password) {
-        String sql = "select * from users where userName=? and password=?";
-        try {
-            Users u = jdbcTemplate.queryForObject(sql, new Object[]{userName, password}, new UsersMapper());
-            if (u != null) {
-                return u;
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return null;
-    }
+		Query query = entityManager.createQuery(sql, Users.class);
+		query.setParameter(0, userName);
+		query.setParameter(1, password);
 
-    public static class UsersMapper implements RowMapper<Users> {
+		if (query.getSingleResult() != null) {
+			return (Users) query.getSingleResult();
+		}
 
-        @Override
-        public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
+		return null;
+	}
 
-            Users u = new Users();
-            u.setUserId(rs.getInt("userId"));
-            u.setUserName(rs.getString("userName"));
-            u.setPassword(rs.getString("password"));
-            return u;
-        }
-
-    }
+//	public static class UsersMapper implements RowMapper<Users> {
+//
+//		@Override
+//		public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
+//
+//			Users u = new Users();
+//			u.setUserId(rs.getInt("userId"));
+//			u.setUserName(rs.getString("userName"));
+//			u.setPassword(rs.getString("password"));
+//			return u;
+//		}
+//
+//	}
 
 }

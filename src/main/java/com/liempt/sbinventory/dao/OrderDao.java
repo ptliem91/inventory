@@ -1,71 +1,82 @@
 package com.liempt.sbinventory.dao;
 
-import com.liempt.sbinventory.entity.Orders;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.liempt.sbinventory.entity.Orders;
 
 @Repository
+@Transactional
 public class OrderDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private EntityManager entityManager;
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
+//    private DataSource dataSource;
+//    private JdbcTemplate jdbcTemplate;
+//
+//    public DataSource getDataSource() {
+//        return dataSource;
+//    }
+//
+//    @Autowired
+//    public void setDataSource(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//        this.jdbcTemplate = new JdbcTemplate(dataSource);
+//    }
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+	public String getOrderNo() {
+//        String sql = "select max(oid) from orders";
 
-    public String getOrderNo() {
-        String sql = "select max(oid) from orders";
-        String orderId = jdbcTemplate.queryForObject(sql, String.class);
-        if (orderId == null) {
-            orderId = "1";
-        } else {
-            orderId = String.valueOf(Integer.parseInt(orderId) + 1);
-        }
+		String sql = "Select max(e.oid) " //
+				+ " from " + Orders.class.getName() + " e ";
 
-        return orderId;
-    }
+		Query query = entityManager.createQuery(sql, Integer.class);
 
-    public List<Orders> getAllOrders() {
-        String sql = "select * from orders order by orderDate desc";
-        return jdbcTemplate.query(sql, new OrderMapper());
-    }
+		String orderId = null;
 
-    private static class OrderMapper implements RowMapper<Orders> {
+//        String orderId = jdbcTemplate.queryForObject(sql, String.class);
+		if (query.getSingleResult() == null) {
+			orderId = "1";
+		} else {
+			orderId = String.valueOf((Integer) query.getSingleResult() + 1);
+		}
 
-        @Override
-        public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Orders o = new Orders();
-            o.setOid(rs.getInt("oid"));
-            o.setCid(rs.getInt("cid"));
-            o.setTotal(rs.getDouble("total"));
-            o.setOrderType(rs.getString("orderType"));
-            o.setOrderDate(rs.getDate("orderDate"));
-            return o;
-        }
+		return orderId;
+	}
 
-    }
+	@SuppressWarnings("unchecked")
+	public List<Orders> getAllOrders() {
+		String sql = "Select new " + Orders.class.getName() //
+				+ "(e.oid, e.cid, e.total, e.orderType, e.orderDate) " //
+				+ " from " + Orders.class.getName() + " e " + " order by e.orderDate desc";
 
-    public boolean saveOrder(Orders orders) {
-        String sql = "insert into orders (cid, total, orderType, orderDate) values (?, ?, ?, ?)";
-        int value = jdbcTemplate.update(sql, new Object[]{orders.getCid(), orders.getTotal(), orders.getOrderType(), orders.getOrderDate()});
-        if (value > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+		Query query = entityManager.createQuery(sql, Orders.class);
+		return query.getResultList();
+	}
 
+//	private static class OrderMapper implements RowMapper<Orders> {
+//
+//		@Override
+//		public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
+//			Orders o = new Orders();
+//			o.setOid(rs.getInt("oid"));
+//			o.setCid(rs.getInt("cid"));
+//			o.setTotal(rs.getDouble("total"));
+//			o.setOrderType(rs.getString("orderType"));
+//			o.setOrderDate(rs.getDate("orderDate"));
+//			return o;
+//		}
+//
+//	}
+
+	public void saveOrder(Orders orders) {
+		entityManager.persist(orders);
+	}
 }
