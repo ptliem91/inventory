@@ -23,7 +23,6 @@
 			<!-- PAGE CONTAINER-->
 			<main
 				class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-				
 			<div class="main-content-container container-fluid px-4">
 
 				<!-- Page Header -->
@@ -36,26 +35,26 @@
 
 				<!-- MAIN CONTENT-->
 				<div class="row">
-					<c:if test="${sm != null}">
-						<div class="alert alert-success alert-dismissable fade in">
-							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							<strong>Success!</strong> ${sm}
-						</div>
-
-					</c:if>
-					<c:if test="${em != null}">
-						<div class="alert alert-danger alert-dismissable fade in">
-							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							<strong>Error!</strong> ${em}
-						</div>
-					</c:if>
+					<div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+						<c:if test="${sm != null}">
+							<div class="alert alert-success alert-dismissable fade in">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong>Success!</strong> ${sm}
+							</div>
+	
+						</c:if>
+						<c:if test="${em != null}">
+							<div class="alert alert-danger alert-dismissable fade in">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong>Error!</strong> ${em}
+							</div>
+						</c:if>
+					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-
 						<div class="card card-small">
-
 							<div class="card-header border-bottom">
 								<h6 class="m-0">
 									<i class="fa fa-chart-bar"></i> Insert Product
@@ -154,7 +153,9 @@
 							</div>
 						</div>
 					</div>
+					
 				</div>
+				
 			</div>
 			
 			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">
