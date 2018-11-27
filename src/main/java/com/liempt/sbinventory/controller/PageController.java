@@ -70,4 +70,9 @@ public class PageController {
 		request.setAttribute("val", id);
 		return "product_server";
 	}
+	
+	@RequestMapping("/403")
+	public String pageNotFound() {
+		return "403";
+	}
 }

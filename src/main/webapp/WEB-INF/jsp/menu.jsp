@@ -2,7 +2,7 @@
 	<div class="main-navbar">
 		<nav
 			class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-			<a class="navbar-brand w-100 mr-0" href="<%=request.getContextPath()%>/"
+			<a class="navbar-brand w-100 mr-0" href="<%=request.getContextPath()%>/home"
 				style="line-height: 25px;">
 				<div class="d-table m-auto"><span
 						class="d-none d-md-inline ml-1">Liti Perfume Inventory</span>

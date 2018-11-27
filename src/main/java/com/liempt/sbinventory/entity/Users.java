@@ -14,7 +14,7 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userid", nullable = false)
-	private int userId;
+	private Long userId;
 
 	@Column(name = "username")
 	private String userName;
@@ -22,20 +22,24 @@ public class Users {
 	@Column
 	private String password;
 
+	@Column(name = "Encryted_Password", length = 128, nullable = false)
+	private String encrytedPassword;
+
 	public Users() {
 	}
 
-	public Users(int userId, String userName, String password) {
+	public Users(Long userId, String userName, String password, String encrytedPassword) {
 		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
+		this.encrytedPassword = encrytedPassword;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -53,6 +57,14 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEncrytedPassword() {
+		return encrytedPassword;
+	}
+
+	public void setEncrytedPassword(String encrytedPassword) {
+		this.encrytedPassword = encrytedPassword;
 	}
 
 	@Override
