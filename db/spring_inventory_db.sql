@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2018 at 11:12 AM
+-- Generation Time: Nov 28, 2018 at 05:26 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,6 +21,99 @@ SET time_zone = "+00:00";
 --
 -- Database: `spring_inventory`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `city`
+--
+
+CREATE TABLE `city` (
+  `ID` int(11) NOT NULL,
+  `Code` varchar(3) NOT NULL,
+  `Name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`ID`, `Code`, `Name`) VALUES
+(1, '01', 'Thành phố Hà Nội'),
+(2, '02', ' Tỉnh Hà Giang'),
+(3, '04', ' Tỉnh Cao Bằng'),
+(4, '06', ' Tỉnh Bắc Kạn'),
+(5, '08', ' Tỉnh Tuyên Quang'),
+(6, '10', ' Tỉnh Lào Cai'),
+(7, '11', ' Tỉnh Điện Biên'),
+(8, '12', ' Tỉnh Lai Châu'),
+(9, '14', ' Tỉnh Sơn La'),
+(10, '15', ' Tỉnh Yên Bái'),
+(11, '17', ' Tỉnh Hoà Bình'),
+(12, '19', ' Tỉnh Thái Nguyên'),
+(13, '20', ' Tỉnh Lạng Sơn'),
+(14, '22', ' Tỉnh Quảng Ninh'),
+(15, '24', ' Tỉnh Bắc Giang'),
+(16, '25', ' Tỉnh Phú Thọ'),
+(17, '26', ' Tỉnh Vĩnh Phúc'),
+(18, '27', ' Tỉnh Bắc Ninh'),
+(19, '28', ' Tỉnh Hà Tây'),
+(20, '30', ' Tỉnh Hải Dương'),
+(21, '31', ' Thành phố Hải Phòng'),
+(22, '33', ' Tỉnh H­ưng Yên'),
+(23, '34', ' Tỉnh Thái Bình'),
+(24, '35', ' Tỉnh Hà Nam'),
+(25, '36', ' Tỉnh Nam Định'),
+(26, '37', ' Tỉnh Ninh Bình'),
+(27, '38', ' Tỉnh Thanh Hoá'),
+(28, '40', ' Tỉnh Nghệ An'),
+(29, '42', ' Tỉnh Hà Tĩnh'),
+(30, '44', ' Tỉnh Quảng Bình'),
+(31, '45', ' Tỉnh Quảng Trị'),
+(32, '46', ' Tỉnh Thừa Thiên Huế'),
+(33, '48', ' Thành phố Đà Nẵng'),
+(34, '49', ' Tỉnh Quảng Nam'),
+(35, '51', ' Tỉnh Quảng Ngãi'),
+(36, '52', ' Tỉnh Bình Định'),
+(37, '54', ' Tỉnh Phú Yên'),
+(38, '56', ' Tỉnh Khánh Hoà'),
+(39, '58', ' Tỉnh Ninh Thuận'),
+(40, '60', ' Tỉnh Bình Thuận'),
+(41, '62', ' Tỉnh Kon Tum'),
+(42, '64', ' Tỉnh Gia Lai'),
+(43, '66', ' Tỉnh Đăk Lăk'),
+(44, '67', ' Tỉnh Đăk Nông'),
+(45, '68', ' Tỉnh Lâm Đồng'),
+(46, '70', ' Tỉnh Bình Phước'),
+(47, '72', ' Tỉnh Tây Ninh'),
+(48, '74', ' Tỉnh Bình Dương'),
+(49, '75', ' Tỉnh Đồng Nai'),
+(50, '77', ' Tỉnh Bà Rịa - Vũng Tàu'),
+(51, '79', ' TP. Hồ Chí Minh'),
+(52, '80', ' Tỉnh Long An'),
+(53, '82', ' Tỉnh Tiền Giang'),
+(54, '83', ' Tỉnh Bến Tre'),
+(55, '84', ' Tỉnh Trà Vinh'),
+(56, '86', ' Tỉnh Vĩnh Long'),
+(57, '87', ' Tỉnh Đồng Tháp'),
+(58, '89', ' Tỉnh An Giang'),
+(59, '91', ' Tỉnh Kiên Giang'),
+(60, '92', ' Thành phố Cần Thơ'),
+(61, '93', ' Tỉnh Hậu Giang'),
+(62, '94', ' Tỉnh Sóc Trăng'),
+(63, '95', ' Tỉnh Bạc Liêu'),
+(64, '96', ' Tỉnh Cà Mau');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country`
+--
+
+CREATE TABLE `country` (
+  `ID` int(11) NOT NULL,
+  `Name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -46,7 +139,7 @@ INSERT INTO `customer` (`cid`, `cname`, `phone`) VALUES
 (6, 'bithi', '01864203231'),
 (8, 'akram', '01515634889'),
 (9, 'liem', '1234'),
-(10, 'pt', '1234');
+(10, 'pt111', '1234');
 
 -- --------------------------------------------------------
 
@@ -266,6 +359,20 @@ INSERT INTO `user_role` (`ID`, `USER_ID`, `ROLE_ID`) VALUES
 --
 
 --
+-- Indexes for table `city`
+--
+ALTER TABLE `city`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Name` (`Name`),
+  ADD UNIQUE KEY `Code` (`Code`);
+
+--
+-- Indexes for table `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -314,10 +421,16 @@ ALTER TABLE `user_role`
 --
 
 --
+-- AUTO_INCREMENT for table `city`
+--
+ALTER TABLE `city`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `orderdetails`
