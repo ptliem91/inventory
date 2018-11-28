@@ -293,3 +293,31 @@ myApp.controller("orderDetailsChartCtrl", function($scope, $http) {
     };
 
 });
+
+
+myApp.controller("masterCtrl", function($scope, $http) {
+
+	// get All City
+	$scope.cities = [];
+	$scope.getAllCity = function() {
+		$http({
+			method : 'GET',
+			url : 'master/allCity'
+		}).then(function(response) {
+			$scope.cities = response.data;
+		});
+	};
+	// call method to get all Customer
+	$scope.getAllCity();
+	
+	// getSelected Product
+	$scope.clickedCity = {};
+
+	// Load more...
+	$scope.limit = 10;	
+    $scope.loadMore = function() {
+      var increamented = $scope.limit + 10;
+      $scope.limit = increamented > $scope.cities.length ? $scope.cities.length : increamented;
+    };
+
+});

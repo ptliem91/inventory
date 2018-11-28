@@ -64,9 +64,11 @@
 							<table class="table mb-0">
 								<thead class="bg-light">
 									<tr>
-										<th colspan="7"><input ng-model="searchText" type="text"
+										<th colspan="7">
+											<input ng-model="searchText" type="text"
 											class="form-control"
-											placeholder="Searchy & Filter By Customer Name" /></th>
+											placeholder="Searchy & Filter By Customer Name" />
+										</th>
 									</tr>
 									<tr>
 										<th>S.NO.</th>

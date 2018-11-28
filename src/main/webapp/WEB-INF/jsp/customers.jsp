@@ -138,11 +138,14 @@
 												<td><a
 													href="<%= request.getContextPath()%>/editCustomer/${row.cid}"
 													class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a></td>
-												<td><a
+												<td>
+													<a
 													onclick="return confirm('Are you want to delete this item?')"
 													href="<%= request.getContextPath()%>/deleteCustomer/${row.cid}"
 													class="btn btn-danger"><i class="fa fa-trash"></i>
-														Delete</a></td>
+														Delete
+													</a>
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>

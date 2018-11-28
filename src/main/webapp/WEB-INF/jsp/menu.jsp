@@ -43,6 +43,10 @@
 					class="fa fa-shopping-cart"></i> <span>Add Order</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link "
+				href="<%=request.getContextPath()%>/address"> <i
+					class="fa fa-shopping-cart"></i> <span>Address</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link "
 				href="<%=request.getContextPath()%>/logout"> <i
 					class="fa fa-arrow-circle-left"></i> <span>LogOut</span>
 			</a></li>

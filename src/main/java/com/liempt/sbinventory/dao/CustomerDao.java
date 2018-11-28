@@ -18,20 +18,6 @@ public class CustomerDao {
 	@Autowired
 	private EntityManager entityManager;
 
-//	private DataSource dataSource;
-//
-//	private JdbcTemplate jdbcTemplate;
-//
-//	public DataSource getDataSource() {
-//		return dataSource;
-//	}
-
-//	@Autowired
-//	public void setDataSource(DataSource dataSource) {
-//		this.dataSource = dataSource;
-//		this.jdbcTemplate = new JdbcTemplate(dataSource);
-//	}
-
 	/**
 	 * Find by primary key (id)
 	 * 
@@ -51,19 +37,6 @@ public class CustomerDao {
 		Query query = entityManager.createQuery(sql, Customer.class);
 		return query.getResultList();
 	}
-
-//	public static class CustomerMapper implements RowMapper<Customer> {
-//
-//		@Override
-//		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			Customer customer = new Customer();
-//			customer.setCid(rs.getInt("cid"));
-//			customer.setCname(rs.getString("cname"));
-//			customer.setPhone(rs.getString("phone"));
-//			return customer;
-//		}
-//
-//	}
 
 	public void saveCustomer(Customer customer) {
 		entityManager.persist(customer);

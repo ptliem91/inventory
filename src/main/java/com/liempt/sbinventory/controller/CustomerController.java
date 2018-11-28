@@ -18,13 +18,13 @@ public class CustomerController {
 	@Autowired
 	private CustomerDao customerDao;
 
-	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-	public String customerPage(ModelMap modelMap, HttpServletRequest request) {
-		modelMap.addAttribute("sm", request.getParameter("sm"));
-		modelMap.addAttribute("em", request.getParameter("em"));
-		modelMap.addAttribute("customers", customerDao.getAllCustomer());
-		return "customer";
-	}
+//	@RequestMapping(value = "/customer", method = RequestMethod.GET)
+//	public String customerPage(ModelMap modelMap, HttpServletRequest request) {
+//		modelMap.addAttribute("sm", request.getParameter("sm"));
+//		modelMap.addAttribute("em", request.getParameter("em"));
+//		modelMap.addAttribute("customers", customerDao.getAllCustomer());
+//		return "customer";
+//	}
 
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
 	public String customerList(ModelMap modelMap, HttpServletRequest request) {
