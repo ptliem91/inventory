@@ -18,19 +18,6 @@ public class OrderDetailsDao {
 	@Autowired
 	private EntityManager entityManager;
 
-//    private DataSource dataSource;
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public DataSource getDataSource() {
-//        return dataSource;
-//    }
-//
-//    @Autowired
-//    public void setDataSource(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//        this.jdbcTemplate = new JdbcTemplate(dataSource);
-//    }
-
 	@SuppressWarnings("unchecked")
 	public List<OrderDetails> getAllOrderDetails() {
 		String sql = "Select new " + OrderDetails.class.getName() //
@@ -52,21 +39,6 @@ public class OrderDetailsDao {
 
 		return query.getResultList();
 	}
-
-//	private static class ODRowMapper implements RowMapper<OrderDetails> {
-//
-//		@Override
-//		public OrderDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			OrderDetails o = new OrderDetails();
-//			o.setOdid(rs.getInt("odid"));
-//			o.setOid(rs.getInt("oid"));
-//			o.setPid(rs.getInt("pid"));
-//			o.setPrice(rs.getDouble("price"));
-//			o.setQty(rs.getInt("qty"));
-//			return o;
-//		}
-//
-//	}
 
 	public void saveOrderDetails(OrderDetails orderDetails) {
 		entityManager.persist(orderDetails);

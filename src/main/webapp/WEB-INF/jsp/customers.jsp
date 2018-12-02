@@ -10,10 +10,10 @@
 <html ng-app="myApp">
 <head>
 <%@ include file="header.jsp"%>
-<title>Product List</title>
+<title>Customer List</title>
 </head>
 
-<body class="h-100">
+<body class="h-100" ng-controller="masterCtrl">
 	<div id="container-fluid">
 		<div class="row">
 
@@ -90,6 +90,22 @@
 										value="${customer.phone}" name="phone" type="text"
 										class="form-control" id="phone">
 								</div>
+								
+								<div class="form-group">
+									<label for="city">City:</label>
+									
+									<c:if test="${customer.cid == null}">
+										<select name="city" class="form-control" ng-model="customer.city">
+											<option ng-repeat="city in cities" value="{{city.id}}">
+												{{city.name}}
+											</option>
+										</select>
+									</c:if>
+									<c:if test="${customer.cid != null}">
+										
+									</c:if>
+									
+								</div>
 
 								<c:if test="${customer.cid != null}">
 									<button type="submit" class="btn btn-warning">
@@ -126,6 +142,7 @@
 											<th scope="col" class="border-0">Id</th>
 											<th scope="col" class="border-0">Name</th>
 											<th scope="col" class="border-0">Phone</th>
+											<th scope="col" class="border-0">City</th>
 											<th colspan="2" scope="col" class="border-0 text-center">Action</th>
 										</tr>
 									</thead>
@@ -135,6 +152,7 @@
 												<td>${row.cid}</td>
 												<td>${row.cname}</td>
 												<td>${row.phone}</td>
+												<td>${row.city.name}</td>
 												<td><a
 													href="<%= request.getContextPath()%>/editCustomer/${row.cid}"
 													class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a></td>

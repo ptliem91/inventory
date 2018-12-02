@@ -71,7 +71,8 @@
 								</div>
 							</div>
 							<div class="card-body text-secondary">
-								Order Date: <input ng-model="orderDate" name="orderDate"
+								Order Date: 
+								<input ng-model="orderDate" name="orderDate"
 									type="date" class="form-control" />
 							</div>
 						</div>

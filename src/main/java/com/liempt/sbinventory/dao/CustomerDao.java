@@ -30,9 +30,7 @@ public class CustomerDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Customer> getAllCustomer() {
-		String sql = "Select new " + Customer.class.getName() //
-				+ "(e.cid, e.cname, e.phone) " //
-				+ " from " + Customer.class.getName() + " e ";
+		String sql = "Select e from " + Customer.class.getName() + " e ";
 
 		Query query = entityManager.createQuery(sql, Customer.class);
 		return query.getResultList();

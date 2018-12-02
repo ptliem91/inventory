@@ -1,5 +1,6 @@
 package com.liempt.sbinventory.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,14 +18,6 @@ public class ProductDao {
 
 	@Autowired
 	private EntityManager entityManager;
-
-//	private DataSource dataSource;
-
-//	private JdbcTemplate jdbcTemplate;
-
-//	public DataSource getDataSource() {
-//		return dataSource;
-//	}
 
 	/**
 	 * Find by primary key (id)
@@ -44,42 +37,12 @@ public class ProductDao {
 	@SuppressWarnings("unchecked")
 	public List<Product> getAllProducts() {
 		String sql = "Select new " + Product.class.getName() //
-				+ "(e.pid, e.pname, e.price, e.qty) " //
+				+ "(e.pid, e.pname, e.price, e.priceSale, e.qty, e.buyDate) " //
 				+ " from " + Product.class.getName() + " e ";
 
 		Query query = entityManager.createQuery(sql, Product.class);
 		return query.getResultList();
 	}
-
-//	@Autowired
-//	public void setDataSource(DataSource dataSource) {
-//		this.dataSource = dataSource;
-//		this.jdbcTemplate = new JdbcTemplate(dataSource);
-//	}
-
-//	public List<Product> getAllProduct() {
-//		String sql = "select * from product";
-//		return jdbcTemplate.query(sql, new ProductMapper());
-//	}
-
-//	public Product getProduct(int id) {
-//		String sql = "select * from product where pid=?";
-//		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new ProductMapper());
-//	}
-
-//	public static class ProductMapper implements RowMapper<Product> {
-//
-//		@Override
-//		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			Product product = new Product();
-//			product.setPid(rs.getInt("pid"));
-//			product.setPname(rs.getString("pname"));
-//			product.setPrice(rs.getDouble("price"));
-//			product.setQty(rs.getInt("qty"));
-//			return product;
-//		}
-//
-//	}
 
 	/**
 	 * Create new a Product
@@ -87,6 +50,9 @@ public class ProductDao {
 	 * @param product
 	 */
 	public void saveProduct(Product product) {
+		product.setCreateDate(new Date());
+		product.setUpdateDate(new Date());
+		
 		entityManager.persist(product);
 	}
 
@@ -96,6 +62,8 @@ public class ProductDao {
 	 * @param product
 	 */
 	public void updateProduct(Product product) {
+		product.setUpdateDate(new Date());
+		
 		entityManager.merge(product);
 	}
 

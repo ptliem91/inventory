@@ -1,5 +1,9 @@
 package com.liempt.sbinventory.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +39,15 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public String saveProduct(ModelMap modelMap, HttpServletRequest request) {
+	public String saveProduct(ModelMap modelMap, HttpServletRequest request) throws ParseException {
 		Product product = new Product();
 		product.setPname(request.getParameter("pname"));
 		product.setPrice(Double.parseDouble(request.getParameter("price")));
+		product.setPriceSale(Double.parseDouble(request.getParameter("priceSale")));
 		product.setQty(Integer.parseInt(request.getParameter("qty")));
+		
+		Date buyDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("buyDate"));
+		product.setBuyDate(buyDate);
 
 		productDao.saveProduct(product);
 		modelMap.addAttribute("sm", "Product Info Saved Successfully");
@@ -61,14 +69,20 @@ public class ProductController {
 	 * @param modelMap
 	 * @param request
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
-	public String updateProduct(ModelMap modelMap, HttpServletRequest request) {
-		Product product = new Product();
-		product.setPid(Integer.parseInt(request.getParameter("pid")));
+	public String updateProduct(ModelMap modelMap, HttpServletRequest request) throws ParseException {
+		Product product = productDao.findById(Integer.parseInt(request.getParameter("pid")));
+		
+//		product.setPid(Integer.parseInt(request.getParameter("pid")));
 		product.setPname(request.getParameter("pname"));
 		product.setPrice(Double.parseDouble(request.getParameter("price")));
+		product.setPriceSale(Double.parseDouble(request.getParameter("priceSale")));
 		product.setQty(Integer.parseInt(request.getParameter("qty")));
+		
+		Date buyDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("buyDate"));
+		product.setBuyDate(buyDate);
 
 		productDao.updateProduct(product);
 		modelMap.addAttribute("sm", "Product Info Update Successfully");

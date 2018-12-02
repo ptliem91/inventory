@@ -305,7 +305,9 @@ myApp.controller("masterCtrl", function($scope, $http) {
 			url : 'master/allCity'
 		}).then(function(response) {
 			$scope.cities = response.data;
-		});
+		}, function(error){
+            console.log(error); //
+        });
 	};
 	// call method to get all Customer
 	$scope.getAllCity();

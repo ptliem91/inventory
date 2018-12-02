@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 28, 2018 at 05:26 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost
+-- Generation Time: Dec 02, 2018 at 03:35 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.5.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -124,22 +122,26 @@ CREATE TABLE `country` (
 CREATE TABLE `customer` (
   `cid` int(10) UNSIGNED NOT NULL,
   `cname` varchar(45) NOT NULL,
-  `phone` varchar(11) NOT NULL
+  `phone` varchar(11) NOT NULL,
+  `city` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`cid`, `cname`, `phone`) VALUES
-(1, 'zubayer', '01515634889'),
-(2, 'rasel', '01914008411'),
-(3, 'uzzol', '01670813134'),
-(4, 'sharmin', '01715491885'),
-(6, 'bithi', '01864203231'),
-(8, 'akram', '01515634889'),
-(9, 'liem', '1234'),
-(10, 'pt111', '1234');
+INSERT INTO `customer` (`cid`, `cname`, `phone`, `city`) VALUES
+(1, 'zubayer', '01515634889', 1),
+(2, 'rasel', '01914008411', 2),
+(3, 'uzzol', '01670813134', 3),
+(4, 'sharmin', '01715491885', NULL),
+(6, 'bithi', '01864203231', NULL),
+(8, 'akram', '01515634889', NULL),
+(9, 'liem', '1234', NULL),
+(10, 'pt111', '1234', NULL),
+(13, '123', '01677514336', 64),
+(14, '123', '01', 60),
+(15, '123', '01677514336', 50);
 
 -- --------------------------------------------------------
 
@@ -273,23 +275,29 @@ CREATE TABLE `product` (
   `pid` int(10) UNSIGNED NOT NULL,
   `pname` varchar(45) NOT NULL,
   `price` double NOT NULL,
-  `qty` int(10) UNSIGNED NOT NULL
+  `price_sale` double NOT NULL,
+  `qty` int(10) UNSIGNED NOT NULL,
+  `buy_date` date NOT NULL,
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`pid`, `pname`, `price`, `qty`) VALUES
-(1, 'shirt', 500, 48),
-(5, 'mobile', 15000, 49),
-(6, 'sunglass', 4000, 40),
-(7, 'laptop', 76000, 79),
-(8, 'bag', 1600, 189),
-(9, 'mouse', 300, 119),
-(10, 'hdd', 5500, 119),
-(11, 'printer', 5000, 100),
-(12, 'AAA12', 123, 123);
+INSERT INTO `product` (`pid`, `pname`, `price`, `price_sale`, `qty`, `buy_date`, `create_date`, `update_date`) VALUES
+(1, 'shirt', 500, 0, 48, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(5, 'mobile', 15000, 0, 49, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(6, 'sunglass', 4000, 0, 40, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(7, 'laptop', 76000, 0, 79, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(8, 'bag', 1600, 0, 189, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(9, 'mouse', 300, 0, 119, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(10, 'hdd', 5500, 0, 119, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(11, 'printer', 5000, 0, 100, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(12, 'AAA12', 123, 0, 123, '2018-12-01', '2018-12-02 16:12:26', '2018-12-02 16:12:26'),
+(13, 'BBB', 123, 456, 13, '2018-12-02', '2018-12-02 16:52:41', '2018-12-02 16:52:41'),
+(14, 'CCC1', 123, 456, 111, '2018-12-01', '2018-12-02 16:52:59', '2018-12-02 16:56:20');
 
 -- --------------------------------------------------------
 
@@ -425,38 +433,31 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `city`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
   MODIFY `odid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `oid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `pid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `pid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `userId` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

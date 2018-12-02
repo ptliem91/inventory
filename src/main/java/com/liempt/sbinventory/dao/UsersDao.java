@@ -17,18 +17,6 @@ public class UsersDao {
 	@Autowired
 	private EntityManager entityManager;
 
-//    private DataSource dataSource;
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public DataSource getDataSource() {
-//        return dataSource;
-//    }
-//
-//    @Autowired
-//    public void setDataSource(DataSource dataSource) {
-//        this.jdbcTemplate = new JdbcTemplate(dataSource);
-//        this.dataSource = dataSource;
-//    }
 	public Users findUserByUserName(String userName) {
 		try {
 			String sql = "Select e from " + Users.class.getName() + " e " //
@@ -58,19 +46,5 @@ public class UsersDao {
 
 		return null;
 	}
-
-//	public static class UsersMapper implements RowMapper<Users> {
-//
-//		@Override
-//		public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
-//
-//			Users u = new Users();
-//			u.setUserId(rs.getInt("userId"));
-//			u.setUserName(rs.getString("userName"));
-//			u.setPassword(rs.getString("password"));
-//			return u;
-//		}
-//
-//	}
 
 }

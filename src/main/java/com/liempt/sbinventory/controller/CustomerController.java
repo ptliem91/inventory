@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.liempt.sbinventory.dao.CityDao;
 import com.liempt.sbinventory.dao.CustomerDao;
+import com.liempt.sbinventory.entity.City;
 import com.liempt.sbinventory.entity.Customer;
 
 @Controller
@@ -17,14 +19,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerDao customerDao;
-
-//	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-//	public String customerPage(ModelMap modelMap, HttpServletRequest request) {
-//		modelMap.addAttribute("sm", request.getParameter("sm"));
-//		modelMap.addAttribute("em", request.getParameter("em"));
-//		modelMap.addAttribute("customers", customerDao.getAllCustomer());
-//		return "customer";
-//	}
+	
+	@Autowired
+	private CityDao cityDao;
 
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
 	public String customerList(ModelMap modelMap, HttpServletRequest request) {
@@ -39,6 +36,9 @@ public class CustomerController {
 		Customer customer = new Customer();
 		customer.setCname(request.getParameter("cname"));
 		customer.setPhone(request.getParameter("phone"));
+		
+		City city = cityDao.findById(Integer.parseInt(request.getParameter("city")));
+		customer.setCity(city);
 
 		customerDao.saveCustomer(customer);
 		modelMap.addAttribute("sm", "Customer Info Saved Successfully");
@@ -49,6 +49,7 @@ public class CustomerController {
 	@RequestMapping(value = "/editCustomer/{id}", method = RequestMethod.GET)
 	public String editCustomer(@PathVariable("id") String id, ModelMap modelMap) {
 		Customer customer = customerDao.findById(Integer.parseInt(id));
+		
 		modelMap.addAttribute("customer", customer);
 		modelMap.addAttribute("customers", customerDao.getAllCustomer());
 		return "customers";
@@ -56,10 +57,14 @@ public class CustomerController {
 
 	@RequestMapping(value = "/updateCustomer", method = RequestMethod.POST)
 	public String updateCustomer(ModelMap modelMap, HttpServletRequest request) {
-		Customer customer = new Customer();
-		customer.setCid(Integer.parseInt(request.getParameter("cid")));
+		Customer customer = customerDao.findById(Integer.parseInt(request.getParameter("cid")));
+		
+//		customer.setCid(Integer.parseInt(request.getParameter("cid")));
 		customer.setCname(request.getParameter("cname"));
 		customer.setPhone(request.getParameter("phone"));
+		
+		City city = cityDao.findById(Integer.parseInt(request.getParameter("city")));
+		customer.setCity(city);
 
 		customerDao.updateCustomer(customer);
 		modelMap.addAttribute("sm", "Customer Info Update Successfully");

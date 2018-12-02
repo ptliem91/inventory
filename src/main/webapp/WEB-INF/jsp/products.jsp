@@ -76,6 +76,12 @@
 										class="form-control" id="pid"
 										<c:if test="${product.pid == null}">disabled="1"</c:if>" readonly="1">
 								</div>
+								
+								<div class="form-group">
+									<label for="buyDate">Buy Date: </label>
+									<input value="${product.buyDate}" name="buyDate"
+										type="date" class="form-control" />
+								</div>
 
 								<div class="form-group">
 									<label for="pname">Product Name:</label> <input
@@ -88,6 +94,13 @@
 										value="${product.price}" name="price" type="text"
 										class="form-control" id="price">
 								</div>
+								
+								<div class="form-group">
+									<label for="priceSale">Price Sale:</label> <input
+										value="${product.priceSale}" name="priceSale" type="text"
+										class="form-control" id="priceSale">
+								</div>
+								
 								<div class="form-group">
 									<label for="age">Quantity:</label> <input
 										value="${product.qty}" name="qty" type="text"
@@ -129,7 +142,9 @@
 											<th scope="col" class="border-0">Id</th>
 											<th scope="col" class="border-0">Product Name</th>
 											<th scope="col" class="border-0">Price</th>
+											<th scope="col" class="border-0">Price Sales</th>
 											<th scope="col" class="border-0">Quantity</th>
+											<th scope="col" class="border-0">Buy date</th>
 											<th colspan="2" scope="col" class="border-0 text-center">Action</th>
 										</tr>
 									</thead>
@@ -139,7 +154,9 @@
 												<td>${row.pid}</td>
 												<td>${row.pname}</td>
 												<td>${row.price}</td>
+												<td>${row.priceSale}</td>
 												<td>${row.qty}</td>
+												<td>${row.buyDate}</td>
 												<td><a
 													href="<%= request.getContextPath()%>/editProduct/${row.pid}"
 													class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
