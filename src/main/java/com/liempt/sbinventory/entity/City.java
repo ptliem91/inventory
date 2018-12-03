@@ -1,5 +1,7 @@
 package com.liempt.sbinventory.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,13 +11,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "city")
-public class City {
+public class City implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4852911359674761526L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", nullable = false)
-	private int id;
-
+	@Column(name = "ID", nullable = false, columnDefinition = "serial")
+	private Integer id;
+ 
 	@Column
 	private String code;
 
@@ -25,17 +32,17 @@ public class City {
 	public City() {
 	}
 
-	public City(int id, String code, String name) {
+	public City(Integer id, String code, String name) {
 		this.id = id;
 		this.code = code;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -7,13 +7,13 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 <head>
 <%@ include file="../header.jsp"%>
 <title>Product List</title>
 </head>
 
-<body ng-controller="masterCtrl" class="h-100">
+<body class="h-100">
 	<div id="container-fluid">
 		<div class="row">
 			<!-- MENU SIDEBAR-->
@@ -72,14 +72,15 @@
 								</c:if>
 								
 								<div class="form-group">
-									<label for="id">City ID: </label> <input
+									<label for="id">City ID: </label>
+									<input
 										value="${city.id}" name="id" type="text"
 										class="form-control" id="id"
-										<c:if test="${city.id == null}">disabled="1"</c:if>" readonly="1">
+										th:text="${city.id == null} ? disabled = '1'" readonly="1">
 								</div>
 								
 								<div class="form-group">
-									<label for="code">City code:</label> 
+									<label for="code">City code:</label>
 									<input maxlength="3"
 										value="${city.code}" name="code" type="text"
 										class="form-control" id="code">
@@ -137,32 +138,35 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="city in cities | limitTo:limit | filter:searchText ">
-											<td>{{city.id}}</td>
-											<td>{{city.code}}</td>
-											<td>{{city.name}}</td>
+									<c:forEach items="${cities}" var ="city">
+										<tr>
+											<td>${city.id}</td>
+											<td>${city.code}</td>
+											<td>${city.name}</td>
 											<td>
 												<a
-												href="<%= request.getContextPath()%>/editAddress/{{city.id}}"
+												href="<%= request.getContextPath() %>/editAddress/${city.id}"
 												class="btn btn-warning"><i class="fa fa-edit"></i> Edit
 												</a>
 											</td>
 											<td>
 												<a
 													onclick="return confirm('Are you want to delete this item?')"
-													href="<%= request.getContextPath()%>/deleteAddress/{{city.id}}"
+													href="<%= request.getContextPath()%>/deleteAddress/${city.id}"
 													class="btn btn-danger"><i class="fa fa-trash"></i>
 														Delete
 												</a>
 											</td>
 										</tr>
+									</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td><button ng-click="loadMore()" type="button"
+											<td><button type="button"
 													class="btn btn-success">
 													<i class="fa fa-th-list"></i> Load more...
-												</button></td>
+												</button>
+											</td>
 										</tr>
 									</tfoot>
 								</table>

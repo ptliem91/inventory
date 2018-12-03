@@ -11,16 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.liempt.sbinventory.dao.CityDao;
 import com.liempt.sbinventory.entity.City;
+import com.liempt.sbinventory.service.CityService;
 
 @Controller
 public class MasterController {
 
 	@Autowired
 	CityDao cityDao;
+	
+	@Autowired
+	CityService cityService;
 
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String getAllProducts(ModelMap modelMap, HttpServletRequest request) {
-		modelMap.addAttribute("cities", cityDao.getAllCity());
+		modelMap.addAttribute("cities", cityService.getAllCities());
 		modelMap.addAttribute("sm", request.getParameter("sm"));
 		modelMap.addAttribute("em", request.getParameter("em"));
 
@@ -50,7 +54,8 @@ public class MasterController {
 
 	@RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
 	public String updateAddress(ModelMap modelMap, HttpServletRequest request) {
-		City city = new City();
+		City city = cityDao.findById(Integer.parseInt(request.getParameter("id")));
+		
 		city.setId(Integer.parseInt(request.getParameter("id")));
 		city.setCode(request.getParameter("code"));
 		city.setName(request.getParameter("name"));

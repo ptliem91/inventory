@@ -28,13 +28,13 @@ public class Product {
 	@Column
 	private double price;
 
-	@Column(name = "price_sale", nullable = false)
+	@Column(name = "price_sale")
 	private double priceSale;
 
 	@Column
 	private int qty;
 
-	@Column(name = "buy_date", nullable = false)
+	@Column(name = "buy_date")
 	@Temporal(TemporalType.DATE)
 	private Date buyDate;
 
