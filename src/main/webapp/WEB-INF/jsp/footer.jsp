@@ -32,3 +32,5 @@
 <script src="/theme/scripts/app/app-blog-overview.1.1.0.js"></script>
 
 <script src="/resources/bootbox/js/custom-bootbox.js"></script>
+
+<script src="/resources/bootbox/ngBootbox.js"></script>

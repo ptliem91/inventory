@@ -134,8 +134,9 @@
 												</a>
 											</td>
 											<td>
-												<a onclick="return confirm('Are you want to delete this item?')"
-													ng-click="deleteCity(city)"
+												<a ng-bootbox-confirm="Are you sure you want to confirm this ? "
+													ng-bootbox-confirm-action="deleteCity(city)" 
+													ng-bootbox-confirm-action-cancel="">
 													class="btn btn-danger"><i class="fa fa-trash"></i> Delete
 												</a>
 											</td>
