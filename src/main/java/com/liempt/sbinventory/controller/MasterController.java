@@ -25,6 +25,7 @@ public class MasterController {
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String getAllProducts(ModelMap modelMap, HttpServletRequest request) {
 		modelMap.addAttribute("cities", cityService.getAllCities());
+		
 		modelMap.addAttribute("sm", request.getParameter("sm"));
 		modelMap.addAttribute("em", request.getParameter("em"));
 

@@ -7,13 +7,13 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 <%@ include file="../header.jsp"%>
 <title>Product List</title>
 </head>
 
-<body class="h-100">
+<body ng-controller="masterCtrl" class="h-100">
 	<div id="container-fluid">
 		<div class="row">
 			<!-- MENU SIDEBAR-->
@@ -61,52 +61,37 @@
 								</h6>
 							</div>
 
-							<div class="card-body pt-0">
-								<c:if test="${city.id != null}">
-									<form action="<%=request.getContextPath()%>/updateAddress"
-										method="post">
-								</c:if>
-								<c:if test="${city.id == null}">
-									<form action="<%=request.getContextPath()%>/addAddress"
-										method="post">
-								</c:if>
-								
+							<div class="card-body pt-0">								
 								<div class="form-group">
 									<label for="id">City ID: </label>
-									<input
-										value="${city.id}" name="id" type="text"
+									<input ng-model="city.id"
+										value="{{city.id}}" name="id" type="text"
 										class="form-control" id="id"
-										th:text="${city.id == null} ? disabled = '1'" readonly="1">
+										readonly="1" />
 								</div>
 								
 								<div class="form-group">
 									<label for="code">City code:</label>
-									<input maxlength="3"
-										value="${city.code}" name="code" type="text"
-										class="form-control" id="code">
+									<input maxlength="3" ng-model="city.code"
+										value="{{city.code}}" name="code" type="text"
+										class="form-control" id="code" />
 								</div>
 
 								<div class="form-group">
-									<label for="name">City Name:</label> <input
-										value="${city.name}" name="name" type="text"
-										class="form-control" id="name">
+									<label for="name">City Name:</label> 
+									<input ng-model="city.name"
+										value="{city.name}" name="name" type="text"
+										class="form-control" id="name" />
 								</div>
 
-								<c:if test="${city.id != null}">
-									<button type="submit" class="btn btn-warning">
-										<i class="fa fa-edit"></i> Update
-									</button>
-									<a href="<%=request.getContextPath()%>/address"
-										class="btn btn-primary pull-right"><i
-										class="fa fa-user-plus"></i> New</a>
-								</c:if>
-
-								<c:if test="${city.id == null}">
-									<button type="submit" class="btn btn-success">
-										<i class="fa fa-send"></i> Submit
-									</button>
-								</c:if>
-								</form>
+								<button ng-show="city.id != null" type="submit" class="btn btn-warning"  ng-click="updateCity()">
+									<i class="fa fa-edit"></i> Update
+								</button>
+								
+								<button ng-show="city.id == null" type="submit" class="btn btn-success" ng-click="addNewCity()">
+									<i class="fa fa-send"></i> Add
+								</button>
+								
 							</div>
 						</div>
 					</div>
@@ -138,31 +123,28 @@
 										</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${cities}" var ="city">
-										<tr>
-											<td>${city.id}</td>
-											<td>${city.code}</td>
-											<td>${city.name}</td>
+										<tr ng-repeat="city in cities | filter: searchText">
+											<td>{{city.id}}</td>
+											<td>{{city.code}}</td>
+											<td>{{city.name}}</td>
 											<td>
-												<a
-												href="<%= request.getContextPath() %>/editAddress/${city.id}"
-												class="btn btn-warning"><i class="fa fa-edit"></i> Edit
+												<a ng-click="editCity(city)"
+												class="btn btn-warning">
+													<i class="fa fa-edit"></i> Edit
 												</a>
 											</td>
 											<td>
-												<a
-													onclick="return confirm('Are you want to delete this item?')"
-													href="<%= request.getContextPath()%>/deleteAddress/${city.id}"
-													class="btn btn-danger"><i class="fa fa-trash"></i>
-														Delete
+												<a onclick="return confirm('Are you want to delete this item?')"
+													ng-click="deleteCity(city)"
+													class="btn btn-danger"><i class="fa fa-trash"></i> Delete
 												</a>
 											</td>
 										</tr>
-									</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td><button type="button"
+											<td>
+												<button ng-show="$scope.cities.length > 10" type="button"
 													class="btn btn-success">
 													<i class="fa fa-th-list"></i> Load more...
 												</button>

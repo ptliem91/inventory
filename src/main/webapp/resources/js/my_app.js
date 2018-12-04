@@ -321,5 +321,82 @@ myApp.controller("masterCtrl", function($scope, $http) {
       var increamented = $scope.limit + 10;
       $scope.limit = increamented > $scope.cities.length ? $scope.cities.length : increamented;
     };
+    
+    // Register city
+	$scope.city = {
+			'code' : '',
+			'name' : ''
+	};
+    $scope.addNewCity = function() {
+    	
+    	$http({
+			method : 'POST',
+			url : 'master/addCity',
+			data : angular.toJson($scope.city),
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).then(function(response) {
+			$scope.os = 1;
+			
+			$scope.getAllCity();
+			$scope.city = {};
+			
+		}, function(reason) {
+			$scope.oe = 0;
+		});
+    };
+    
+    // Edit city
+    $scope.editCity = function(city) {
+
+    	$http({
+    		method : 'GET',
+			url : 'master/getCityById/' + city.id
+		}).then(function(response) {
+			$scope.os = 1;
+			
+			$scope.city = response.data;
+			
+		}, function(reason) {
+			$scope.oe = 0;
+		});
+    };
+    
+    // Update
+    $scope.updateCity = function(city) {
+
+    	$http({
+    		method : 'PUT',
+			url : 'master/updateCity',
+			data : angular.toJson($scope.city)
+			
+		}).then(function(response) {
+			$scope.os = 1;
+			
+			$scope.getAllCity();
+			$scope.city = {};
+			
+		}, function(reason) {
+			$scope.oe = 0;
+		});
+    };
+    
+    // Delete
+    $scope.deleteCity = function(city) {
+
+    	$http({
+    		method : 'DELETE',
+			url : 'master/deleteCity/'  + city.id
+			
+		}).then(function(response) {
+			$scope.os = 1;
+			
+			$scope.getAllCity();
+			
+		}, function(reason) {
+			$scope.oe = 0;
+		});
+    };
 
 });
