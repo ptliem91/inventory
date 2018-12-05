@@ -7,6 +7,6 @@ import com.liempt.sbinventory.entity.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface CityRepository extends JpaRepository<City, Long> {
+public interface CityRepository extends JpaRepository<City, Integer> {
 
 }

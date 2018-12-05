@@ -11,16 +11,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "product")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pid", nullable = false)
-	private int pid;
+	@Column(name = "pid", nullable = false, columnDefinition = "serial")
+	private Integer pid;
 
 	@Column
 	private String pname;
@@ -44,23 +45,11 @@ public class Product {
 	@Column
 	private Date updateDate;
 
-	public Product() {
-	}
-
-	public Product(int pid, String pname, double price, double priceSale, int qty, Date buyDate) {
-		this.pid = pid;
-		this.pname = pname;
-		this.price = price;
-		this.priceSale = priceSale;
-		this.qty = qty;
-		this.buyDate = buyDate;
-	}
-
-	public int getPid() {
+	public Integer getPid() {
 		return pid;
 	}
 
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 

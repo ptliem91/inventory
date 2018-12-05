@@ -65,7 +65,7 @@
 								<div class="form-group">
 									<label for="id">City ID: </label>
 									<input ng-model="city.id"
-										value="{{city.id}}" name="id" type="text"
+										value="city.id" name="id" type="text"
 										class="form-control" id="id"
 										readonly="1" />
 								</div>
@@ -73,14 +73,14 @@
 								<div class="form-group">
 									<label for="code">City code:</label>
 									<input maxlength="3" ng-model="city.code"
-										value="{{city.code}}" name="code" type="text"
+										value="city.code" name="code" type="text"
 										class="form-control" id="code" />
 								</div>
 
 								<div class="form-group">
 									<label for="name">City Name:</label> 
 									<input ng-model="city.name"
-										value="{city.name}" name="name" type="text"
+										value="city.name" name="name" type="text"
 										class="form-control" id="name" />
 								</div>
 
@@ -112,7 +112,7 @@
 											<th colspan="5">
 												<input ng-model="searchText" type="text"
 												class="form-control"
-												placeholder="Searchy & Filter By City Name" />
+												placeholder="Search..." />
 											</th>
 										</tr>
 										<tr>
@@ -123,29 +123,31 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="city in cities | filter: searchText">
+										<tr ng-repeat="city in cities | filter: searchText | limitTo:limit">
 											<td>{{city.id}}</td>
 											<td>{{city.code}}</td>
 											<td>{{city.name}}</td>
 											<td>
-												<a ng-click="editCity(city)"
+												<button ng-click="editCity(city)"
 												class="btn btn-warning">
 													<i class="fa fa-edit"></i> Edit
-												</a>
+												</button>
 											</td>
 											<td>
-												<a ng-bootbox-confirm="Are you sure you want to confirm this ? "
+												<button ng-bootbox-confirm="Are you sure you want to delete this ? "
 													ng-bootbox-confirm-action="deleteCity(city)" 
-													ng-bootbox-confirm-action-cancel="">
+													ng-bootbox-confirm-action-cancel=""
 													class="btn btn-danger"><i class="fa fa-trash"></i> Delete
-												</a>
+												</button>
 											</td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr>
 											<td>
-												<button ng-show="$scope.cities.length > 10" type="button"
+												<button ng-show="cities.length > limit"
+													ng-click="loadMore()"
+													type="button"
 													class="btn btn-success">
 													<i class="fa fa-th-list"></i> Load more...
 												</button>
@@ -172,6 +174,7 @@
 	</div>
 
 	<%@ include file="../footer.jsp"%>
+	<script src="/resources/js/city_controller.js"></script>
 	
 </body>
 </html>
