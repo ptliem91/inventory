@@ -17,7 +17,7 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0"
-	href="/theme/styles/shards-dashboards.1.1.0.min.css">
+	href="/theme/styles/shards-dashboards.1.1.0.css">
 
 <link rel="stylesheet" href="/theme/styles/extras.1.1.0.min.css">
 

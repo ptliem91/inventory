@@ -64,7 +64,7 @@
 							<table class="table mb-0">
 								<thead class="bg-light">
 									<tr>
-										<th colspan="7">
+										<th colspan="8">
 											<input ng-model="searchText" type="text"
 											class="form-control"
 											placeholder="Search..." />
@@ -77,6 +77,7 @@
 										<th>Order Type</th>
 										<th>Order Date</th>
 										<th>Amout (TK)</th>
+										<th>Ship Service</th>
 										<th>Display Order Details</th>
 									</tr>
 								</thead>
@@ -89,10 +90,13 @@
 										<td>{{order.orderType}}</td>
 										<td>{{order.orderDate}}</td>
 										<td>{{order.total}}</td>
-										<td><button ng-click="findOd(order)" type="button"
+										<td ng-repeat="shipService in shipServices | filter: order.shipService" >{{shipService.name}}</td>
+										<td>
+											<button ng-click="findOd(order)" type="button"
 												class="btn btn-default">
 												<i class="fa fa-search-plus"></i>
-											</button></td>
+											</button>
+										</td>
 									</tr>
 								</tbody>
 								<tfoot>

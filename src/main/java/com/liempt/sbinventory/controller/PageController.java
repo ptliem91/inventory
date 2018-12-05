@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.liempt.sbinventory.dao.OrderDao;
 import com.liempt.sbinventory.service.CustomerService;
 import com.liempt.sbinventory.service.OrdersService;
 import com.liempt.sbinventory.service.ProductService;
@@ -49,6 +48,11 @@ public class PageController {
 	@RequestMapping("/order_detail")
 	public String orderDetailPage() {
 		return "order_detail";
+	}
+	
+	@RequestMapping("/ship_service")
+	public String shipServicePage() {
+		return "master/ship_service";
 	}
 
 	/**

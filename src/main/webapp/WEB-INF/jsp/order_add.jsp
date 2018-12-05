@@ -76,6 +76,15 @@
 								<input ng-model="orderDate" name="orderDate"
 									type="date" class="form-control" />
 							</div>
+							
+							<div class="card-body text-secondary">
+								<label for="Ship Service">Ship Service</label>
+								<select name="city" class="form-control" ng-model="shipService">
+										<option ng-repeat="shipService in shipServices" value="{{shipService.id}}">
+											{{shipService.name}}
+										</option>
+								</select>
+							</div>
 						</div>
 					</div>
 

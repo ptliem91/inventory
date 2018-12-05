@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "orders")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Orders {
 
 	@Id
@@ -36,16 +36,8 @@ public class Orders {
 	@Column(name = "orderdate")
 	private Date orderDate;
 
-	public Orders() {
-	}
-
-	public Orders(Integer oid, int cid, double total, String orderType, Date orderDate) {
-		this.oid = oid;
-		this.cid = cid;
-		this.total = total;
-		this.orderType = orderType;
-		this.orderDate = orderDate;
-	}
+	@Column(name = "ship_service")
+	private Integer shipService;
 
 	/**
 	 * @return the oid
@@ -117,10 +109,18 @@ public class Orders {
 		this.orderDate = orderDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Orders{" + "oid=" + oid + ", cid=" + cid + ", total=" + total + ", orderType=" + orderType
-				+ ", orderDate=" + orderDate + '}';
+	/**
+	 * @return the shipService
+	 */
+	public Integer getShipService() {
+		return shipService;
+	}
+
+	/**
+	 * @param shipService the shipService to set
+	 */
+	public void setShipService(Integer shipService) {
+		this.shipService = shipService;
 	}
 
 }

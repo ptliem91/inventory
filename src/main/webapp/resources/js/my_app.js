@@ -40,6 +40,19 @@ myApp
 
 					// getSelected Customer
 					$scope.clickedCustomer = {};
+					
+					// get All Ship Service
+					$scope.shipServices = [];
+					$scope.getAllShipService = function() {
+						$http({
+							method : 'GET',
+							url : 'master/allShipService'
+						}).then(function(response) {
+							$scope.shipServices = response.data;
+						});
+					};
+					// call method to get all Ship Service
+					$scope.getAllShipService();
 
 					// order logic control
 					$scope.qty = 0;
@@ -102,7 +115,8 @@ myApp
 							'cid' : '',
 							'total' : '',
 							'orderType' : '',
-							'orderDate' : ''
+							'orderDate' : '',
+							'shipService' : ''
 						};
 
 						// make order perform
@@ -110,6 +124,7 @@ myApp
 						$scope.order.total = $scope.finalTotal;
 						$scope.order.orderType = $scope.orderType;
 						$scope.order.orderDate = $scope.orderDate;
+						$scope.order.shipService = $scope.shipService;
 
 						$http({
 							method : 'POST',
@@ -258,6 +273,19 @@ myApp.controller("orderDetailsChartCtrl", function($scope, $http) {
 	};
 	// call method to get all orders info
 	$scope.getAllOrders();
+	
+	// get All Ship Service
+	$scope.shipServices = [];
+	$scope.getAllShipService = function() {
+		$http({
+			method : 'GET',
+			url : 'master/allShipService'
+		}).then(function(response) {
+			$scope.shipServices = response.data;
+		});
+	};
+	// call method to get all Ship Service
+	$scope.getAllShipService();
 
 	// get order details info by order id
 	$scope.clickedItem = {};

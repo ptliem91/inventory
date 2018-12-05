@@ -26,30 +26,48 @@
 	</form>
 	<div class="nav-wrapper">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link "
-				href="<%=request.getContextPath()%>/products"> <i
-					class="fa fa-truck"></i> <span>Product</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link "
-				href="<%=request.getContextPath()%>/customers"> <i
-					class="fa fa-users"></i> <span>Customer</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link "
-				href="<%=request.getContextPath()%>/order_detail"> <i
-					class="fa fa-chart-bar"></i> <span>Order Detail</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link "
-				href="<%=request.getContextPath()%>/order_add"> <i
-					class="fa fa-shopping-cart"></i> <span>Add Order</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link "
-				href="<%=request.getContextPath()%>/address"> <i
-					class="fa fa-shopping-cart"></i> <span>Address</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link "
-				href="<%=request.getContextPath()%>/logout"> <i
-					class="fa fa-arrow-circle-left"></i> <span>LogOut</span>
-			</a></li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/products"> <i
+						class="fa fa-heart"></i> <span>Product</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/customers"> <i
+						class="fa fa-users"></i> <span>Customer</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/order_detail"> <i style="font-size: large;"
+						class="fa fa-chart-bar"></i> <span>Order Detail</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/order_add"> <i
+						class="fa fa-shopping-cart"></i> <span>Add Order</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/address"> <i
+						class="fa fa-address-card"></i> <span>Address</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/ship_service"> <i
+						class="fa fa-truck"></i> <span>Ship Service</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
+					href="<%=request.getContextPath()%>/logout"> <i
+						class="fa fa-arrow-circle-left"></i> <span>LogOut</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 </aside>
