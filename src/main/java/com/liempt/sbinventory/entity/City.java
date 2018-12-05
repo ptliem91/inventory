@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "city")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class City implements Serializable {
 
 	/**
@@ -25,12 +25,21 @@ public class City implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false, columnDefinition = "serial")
 	private Integer id;
- 
+
 	@Column
 	private String code;
 
 	@Column
 	private String name;
+
+	public City() {
+	}
+
+	public City(Integer id, String code, String name) {
+		this.id = id;
+		this.code = code;
+		this.name = name;
+	}
 
 	public Integer getId() {
 		return id;

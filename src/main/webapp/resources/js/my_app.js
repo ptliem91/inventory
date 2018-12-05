@@ -246,18 +246,6 @@ myApp
 
 myApp.controller("orderDetailsChartCtrl", function($scope, $http) {
 
-	// get All Customer
-	$scope.getAllCustomer = function() {
-		$http({
-			method : 'GET',
-			url : 'customers/allCustomer'
-		}).then(function(response) {
-			$scope.customers = response.data;
-		});
-	};
-	// call method to get all Customer
-	$scope.getAllCustomer();
-
 	// get all orders info
 	$scope.orders = [];
 	$scope.getAllOrders = function() {

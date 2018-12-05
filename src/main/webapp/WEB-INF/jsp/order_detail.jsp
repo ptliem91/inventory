@@ -67,7 +67,7 @@
 										<th colspan="7">
 											<input ng-model="searchText" type="text"
 											class="form-control"
-											placeholder="Searchy & Filter By Customer Name" />
+											placeholder="Search..." />
 										</th>
 									</tr>
 									<tr>
@@ -97,7 +97,8 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<td><button ng-click="loadMore()" type="button"
+										<td><button ng-click="loadMore()" ng-show="orders.length > limit"
+												type="button"
 												class="btn btn-success">
 												<i class="fa fa-th-list"></i> Load more...
 											</button></td>
@@ -141,7 +142,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 			
 			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">

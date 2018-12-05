@@ -64,7 +64,8 @@
 								<div class="radio">
 									<label> <input type="radio" name="orderType"
 										ng-model="orderType" value="sell"> Sell
-									</label> &nbsp; &nbsp; &nbsp; <label> <input type="radio"
+									</label> &nbsp; &nbsp; &nbsp; <label> 
+									<input type="radio"
 										name="orderType" ng-model="orderType" value="purchase">
 										Purchase
 									</label>
@@ -85,7 +86,8 @@
 							</div>
 
 							<div class="card-body text-secondary">
-								<label for="Product Name">Product Name</label> <select
+								<label for="Product Name">Product Name</label> 
+								<select
 									name="pname" class="form-control" ng-model="clickedProduct"
 									ng-options="product.pname for product in products">
 								</select>

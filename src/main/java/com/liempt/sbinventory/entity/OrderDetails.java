@@ -7,14 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "orderdetails")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OrderDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "odid", nullable = false)
-	private int odid;
+	@Column(name = "odid", nullable = false, columnDefinition = "serial")
+	private Integer odid;
 
 	@Column
 	private int oid;
@@ -31,7 +34,7 @@ public class OrderDetails {
 	public OrderDetails() {
 	}
 
-	public OrderDetails(int odid, int oid, int pid, double price, int qty) {
+	public OrderDetails(Integer odid, int oid, int pid, double price, int qty) {
 		this.odid = odid;
 		this.oid = oid;
 		this.pid = pid;
@@ -39,11 +42,11 @@ public class OrderDetails {
 		this.qty = qty;
 	}
 
-	public int getOdid() {
+	public Integer getOdid() {
 		return odid;
 	}
 
-	public void setOdid(int odid) {
+	public void setOdid(Integer odid) {
 		this.odid = odid;
 	}
 

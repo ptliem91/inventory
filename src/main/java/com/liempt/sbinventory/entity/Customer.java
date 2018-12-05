@@ -2,22 +2,22 @@ package com.liempt.sbinventory.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "customer")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cid", nullable = false)
-	private int cid;
+	@Column(name = "cid", nullable = false, columnDefinition = "serial")
+	private Integer cid;
 
 	@Column
 	private String cname;
@@ -25,24 +25,14 @@ public class Customer {
 	@Column
 	private String phone;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "city", nullable = true)
-	private City city;
+	@Column(name = "city")
+	private Integer cityId;
 
-	public Customer() {
-	}
-
-	public Customer(int cid, String cname, String phone, int city) {
-		this.cid = cid;
-		this.cname = cname;
-		this.phone = phone;
-	}
-
-	public int getCid() {
+	public Integer getCid() {
 		return cid;
 	}
 
-	public void setCid(int cid) {
+	public void setCid(Integer cid) {
 		this.cid = cid;
 	}
 
@@ -62,23 +52,11 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	/**
-	 * @return the city
-	 */
-	public City getCity() {
-		return city;
+	public Integer getCityId() {
+		return cityId;
 	}
 
-	/**
-	 * @param city the city to set
-	 */
-	public void setCity(City city) {
-		this.city = city;
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
 	}
-
-	@Override
-	public String toString() {
-		return "Customer{" + "cid=" + cid + ", cname=" + cname + ", phone=" + phone + '}';
-	}
-
 }

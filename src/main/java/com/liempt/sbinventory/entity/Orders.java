@@ -11,14 +11,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "orders")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Orders {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "oid", nullable = false)
-	private int oid;
+	@Column(name = "oid", nullable = false, columnDefinition = "serial")
+	private Integer oid;
 
 	@Column
 	private int cid;
@@ -29,14 +32,14 @@ public class Orders {
 	@Column(name = "ordertype")
 	private String orderType;
 
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	@Column(name = "orderdate")
 	private Date orderDate;
 
 	public Orders() {
 	}
 
-	public Orders(int oid, int cid, double total, String orderType, Date orderDate) {
+	public Orders(Integer oid, int cid, double total, String orderType, Date orderDate) {
 		this.oid = oid;
 		this.cid = cid;
 		this.total = total;
@@ -47,14 +50,14 @@ public class Orders {
 	/**
 	 * @return the oid
 	 */
-	public int getOid() {
+	public Integer getOid() {
 		return oid;
 	}
 
 	/**
 	 * @param oid the oid to set
 	 */
-	public void setOid(int oid) {
+	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
 

@@ -6,28 +6,30 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.liempt.sbinventory.dao.CustomerDao;
 import com.liempt.sbinventory.dao.OrderDao;
-import com.liempt.sbinventory.dao.ProductDao;
+import com.liempt.sbinventory.service.CustomerService;
+import com.liempt.sbinventory.service.OrdersService;
+import com.liempt.sbinventory.service.ProductService;
 
 @Controller
 public class PageController {
 
 	@Autowired
-	private OrderDao orderDao;
+	private OrdersService ordersService;
+
 	@Autowired
-	private ProductDao productDao;
+	private ProductService productService;
+
 	@Autowired
-	private CustomerDao customerDao;
+	private CustomerService customerService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
+
 		if (session.getAttribute("user_id") != null) {
 			return "home";
 		}
@@ -51,26 +53,23 @@ public class PageController {
 
 	/**
 	 * Get data for Add order page
+	 * 
 	 * @param modelMap
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = "/order_add", method = RequestMethod.GET)
 	public String orderAddPage(ModelMap modelMap, HttpServletRequest request) {
-		modelMap.addAttribute("orderNo", orderDao.getOrderNo());
-		modelMap.addAttribute("products", productDao.getAllProducts());
-		modelMap.addAttribute("customers", customerDao.getAllCustomer());
+		modelMap.addAttribute("orderNo", ordersService.getMaxId());
+
+		modelMap.addAttribute("products", productService.getAllProducts());
+
+		modelMap.addAttribute("customers", customerService.getAllCustomers());
+
 		modelMap.addAttribute("em", request.getParameter("em"));
 		return "order_add";
 	}
 
-	@RequestMapping("/product_server/{id}")
-	public String productServerPage(ModelMap modelMap, @PathVariable("id") String id, HttpServletRequest request) {
-		// modelMap.addAttribute("val", id);
-		request.setAttribute("val", id);
-		return "product_server";
-	}
-	
 	@RequestMapping("/403")
 	public String pageNotFound() {
 		return "403";
