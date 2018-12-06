@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.liempt.sbinventory.entity.Orders;
@@ -48,7 +50,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public List<Orders> getAllOrders() {
-		return ordersRepository.findAll();
+		return ordersRepository.findAll(Sort.by(Direction.ASC, "oid"));
 	}
 
 	@Override

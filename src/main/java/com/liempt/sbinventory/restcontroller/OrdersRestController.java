@@ -28,5 +28,12 @@ public class OrdersRestController {
 		ordersService.createOrders(orders);
 		return orders;
 	}
+	
+	@RequestMapping(value = "/updateOrder", method = RequestMethod.PUT)
+	public Orders updateProduct(@RequestBody Orders p) {
+		ordersService.editOrders(p);
+		return p;
+	}
+
 
 }

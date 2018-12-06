@@ -28,6 +28,9 @@ public class Customer {
 	@Column(name = "city")
 	private Integer cityId;
 
+	@Column
+	private String address;
+
 	public Integer getCid() {
 		return cid;
 	}
@@ -59,4 +62,19 @@ public class Customer {
 	public void setCityId(Integer cityId) {
 		this.cityId = cityId;
 	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 }

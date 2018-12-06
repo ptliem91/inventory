@@ -56,13 +56,15 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 						<div class="card card-small mb-4">
 							<div class="card-body text-secondary">
-								Order No <input name="oid" type="text" class="form-control"
-									ng-model="oid = ${orderNo}" value="${orderNo}" />
+								Order No 
+								<input name="oid" type="text" class="form-control"
+									ng-model="oid" value="${orderNo}" ng-init="oid = ${orderNo}" readonly="1"/>
 							</div>
-							<div class="card-body text-secondary">
+							<!-- <div class="card-body text-secondary">
 								Order Type
 								<div class="radio">
-									<label> <input type="radio" name="orderType"
+									<label> 
+									<input type="radio" name="orderType"
 										ng-model="orderType" value="sell"> Sell
 									</label> &nbsp; &nbsp; &nbsp; <label> 
 									<input type="radio"
@@ -70,7 +72,7 @@
 										Purchase
 									</label>
 								</div>
-							</div>
+							</div> -->
 							<div class="card-body text-secondary">
 								Order Date: 
 								<input ng-model="orderDate" name="orderDate"
@@ -78,10 +80,19 @@
 							</div>
 							
 							<div class="card-body text-secondary">
-								<label for="Ship Service">Ship Service</label>
-								<select name="city" class="form-control" ng-model="shipService">
+								<label for="shipService">Ship Service</label>
+								<select name="shipService" class="form-control" ng-model="shipService">
 										<option ng-repeat="shipService in shipServices" value="{{shipService.id}}">
 											{{shipService.name}}
+										</option>
+								</select>
+							</div>
+							
+							<div class="card-body text-secondary">
+								<label for="shipStatus">Ship Status</label>
+								<select name="shipStatus" class="form-control" ng-model="shipStatus">
+										<option ng-repeat="shipStatus in shipStatuses" value="{{shipStatus.id}}">
+											{{shipStatus.status}}
 										</option>
 								</select>
 							</div>
@@ -152,9 +163,10 @@
 						</div>
 
 						<div class="card-body" ng-show="clickedProduct.pid != null">
-							<label for="qty">Quantity:</label> <input readonly="1"
-								name="orderQty" ng-model="qty = 1" type="text"
-								class="form-control" id="qty" placeholder="Enter Quantity">
+							<label for="qty">Quantity:</label>
+							<input readonly="1"
+								name="orderQty" ng-model="qty" ng-init="qty = 1"
+								type="text" class="form-control" id="qty" placeholder="Enter Quantity">
 						</div>
 						<div class="card-body"
 							ng-show="qty != 0 && clickedProduct.pid != null">
@@ -324,15 +336,17 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
+							<h4 class="modal-title" align="center">
+								Congratulation
+							</h4>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title" align="center">Congratulation</h4>
 						</div>
 						<div class="modal-body">
 							<h1 style="color: green; text-align: center">Order Complete
 								Successfully</h1>
 						</div>
 						<div class="modal-footer">
-							<a href="<%=request.getContextPath()%>" class="btn btn-default">Close</a>
+							<a href="<%=request.getContextPath()%>/order_add" class="btn btn-default">Close</a>
 						</div>
 					</div>
 

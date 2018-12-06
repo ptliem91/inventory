@@ -3,6 +3,8 @@ package com.liempt.sbinventory.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.liempt.sbinventory.entity.Product;
@@ -42,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> getAllProducts() {
-		return productRepository.findAll();
+		return productRepository.findAll(Sort.by(Direction.ASC, "pid"));
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class Orders {
 	private Integer oid;
 
 	@Column
-	private int cid;
+	private Integer cid;
 
 	@Column
 	private double total;
@@ -38,6 +38,9 @@ public class Orders {
 
 	@Column(name = "ship_service")
 	private Integer shipService;
+
+	@Column(name = "ship_status")
+	private Integer shipStatus;
 
 	/**
 	 * @return the oid
@@ -56,14 +59,14 @@ public class Orders {
 	/**
 	 * @return the cid
 	 */
-	public int getCid() {
+	public Integer getCid() {
 		return cid;
 	}
 
 	/**
 	 * @param cid the cid to set
 	 */
-	public void setCid(int cid) {
+	public void setCid(Integer cid) {
 		this.cid = cid;
 	}
 
@@ -121,6 +124,20 @@ public class Orders {
 	 */
 	public void setShipService(Integer shipService) {
 		this.shipService = shipService;
+	}
+
+	/**
+	 * @return the shipStatus
+	 */
+	public Integer getShipStatus() {
+		return shipStatus;
+	}
+
+	/**
+	 * @param shipStatus the shipStatus to set
+	 */
+	public void setShipStatus(Integer shipStatus) {
+		this.shipStatus = shipStatus;
 	}
 
 }

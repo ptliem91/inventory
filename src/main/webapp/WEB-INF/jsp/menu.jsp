@@ -64,6 +64,12 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link "
+					href="<%=request.getContextPath()%>/ship_status"> <i
+						class="fa fa-spinner"></i> <span>Ship Status</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link "
 					href="<%=request.getContextPath()%>/logout"> <i
 						class="fa fa-arrow-circle-left"></i> <span>LogOut</span>
 				</a>

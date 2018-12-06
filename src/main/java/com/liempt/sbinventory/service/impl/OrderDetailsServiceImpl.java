@@ -59,10 +59,10 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderDetails> getAllOrderDetailsByOrderId(int oid) {
-		String sql = "Select e from " + OrderDetails.class.getName() + " e " + " where oid = ? ";
+		String sql = "Select e from " + OrderDetails.class.getName() + " e " + " where oid = :oid ";
 
 		Query query = entityManager.createQuery(sql, OrderDetails.class);
-		query.setParameter(0, oid);
+		query.setParameter("oid", oid);
 
 		return query.getResultList();
 	}

@@ -93,6 +93,15 @@
 										</option>
 									</select>
 								</div>
+								
+								<div class="form-group">
+									<label for="address">Address:</label>
+									<textarea rows="4" cols="50" ng-required="true" ngMaxlength="225"
+										ng-model="customer.address"
+										name="address" type="text"
+										class="form-control" id="address">
+									</textarea>
+								</div>
 
 								<button ng-show="customer.cid != null" type="submit" class="btn btn-warning"  ng-click="updateCustomer()">
 									<i class="fa fa-edit"></i> Update
@@ -119,7 +128,7 @@
 								<table class="table mb-0">
 									<thead class="bg-light">
 										<tr>
-											<th colspan="6">
+											<th colspan="7">
 												<input ng-model="searchText" type="text"
 												class="form-control"
 												placeholder="Search..." />
@@ -130,6 +139,7 @@
 											<th scope="col" class="border-0">Name</th>
 											<th scope="col" class="border-0">Phone</th>
 											<th scope="col" class="border-0">City</th>
+											<th scope="col" class="border-0" style="width: 30%;">Address</th>
 											<th colspan="2" scope="col" class="border-0 text-center">Action</th>
 										</tr>
 									</thead>
@@ -139,6 +149,7 @@
 											<td>{{customer.cname}}</td>
 											<td>{{customer.phone}}</td>
 											<td ng-repeat="city in cities | filter: customer.cityId">{{city.name}}</td>
+											<td>{{customer.address}}</td>
 											<td>
 												<button ng-click="editCustomer(customer)" class="btn btn-warning">
 													<i class="fa fa-edit"></i> Edit

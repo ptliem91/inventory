@@ -43,7 +43,8 @@ myApp.controller("customerCtrl", function($scope, $http) {
 	$scope.customer = {
 			'cname' : '',
 			'phone' : '',
-			'cityId' : ''
+			'cityId' : '',
+			'address' : ''
 	};
     $scope.addNewCustomer = function() {
     	$http({

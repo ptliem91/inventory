@@ -1,5 +1,6 @@
 package com.liempt.sbinventory.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,13 +16,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "product")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Product {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Product implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2686751558769758210L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pid", nullable = false, columnDefinition = "serial")
 	private Integer pid;
+
+	@Column
+	private String code;
 
 	@Column
 	private String pname;
@@ -51,6 +60,20 @@ public class Product {
 
 	public void setPid(Integer pid) {
 		this.pid = pid;
+	}
+
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getPname() {

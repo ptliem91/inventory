@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.liempt.sbinventory.entity.City;
 import com.liempt.sbinventory.entity.ShipService;
+import com.liempt.sbinventory.entity.ShipStatus;
 import com.liempt.sbinventory.service.CityService;
 import com.liempt.sbinventory.service.ShipServiceService;
+import com.liempt.sbinventory.service.ShipStatusService;
 
 @RestController
 @RequestMapping("/master")
@@ -23,6 +25,9 @@ public class MasterRestController {
 
 	@Autowired
 	private ShipServiceService shipServiceService;
+
+	@Autowired
+	private ShipStatusService shipStatusService;
 
 	@RequestMapping(value = "/allCity", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<City> getAllCustomer() {
@@ -77,5 +82,33 @@ public class MasterRestController {
 	@RequestMapping(value = "/deleteShipService/{id}", method = RequestMethod.DELETE)
 	public void deleteShipService(@PathVariable("id") String id) {
 		shipServiceService.deleteShipService(Integer.parseInt(id));
+	}
+
+	/* ========== SHIP STATUS ========== */
+	@RequestMapping(value = "/allShipStatus", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<ShipStatus> getAllShipStatus() {
+		return shipStatusService.getAllShipStatuss();
+	}
+
+	@RequestMapping(value = "/addShipStatus", method = RequestMethod.POST)
+	public ShipStatus saveShipStatus(@RequestBody ShipStatus shipStatus) {
+		shipStatusService.createShipStatus(shipStatus);
+		return shipStatus;
+	}
+
+	@RequestMapping(value = "/getShipStatusById/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ShipStatus getShipStatus(@PathVariable("id") String id) {
+		return shipStatusService.getShipStatus(Integer.parseInt(id));
+	}
+
+	@RequestMapping(value = "/updateShipStatus", method = RequestMethod.PUT)
+	public ShipStatus updateCity(@RequestBody ShipStatus shipStatus) {
+		shipStatusService.editShipStatus(shipStatus);
+		return shipStatus;
+	}
+
+	@RequestMapping(value = "/deleteShipStatus/{id}", method = RequestMethod.DELETE)
+	public void deleteShipStatus(@PathVariable("id") String id) {
+		shipStatusService.deleteShipStatus(Integer.parseInt(id));
 	}
 }

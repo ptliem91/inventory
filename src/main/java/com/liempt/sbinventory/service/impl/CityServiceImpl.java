@@ -3,6 +3,8 @@ package com.liempt.sbinventory.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.liempt.sbinventory.entity.City;
@@ -42,7 +44,7 @@ public class CityServiceImpl implements CityService {
 
 	@Override
 	public List<City> getAllCities() {
-		return cityRepository.findAll();
+		return cityRepository.findAll(Sort.by(Direction.ASC, "id"));
 	}
 
 	@Override

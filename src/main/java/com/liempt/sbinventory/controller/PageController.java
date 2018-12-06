@@ -49,10 +49,15 @@ public class PageController {
 	public String orderDetailPage() {
 		return "order_detail";
 	}
-	
+
 	@RequestMapping("/ship_service")
 	public String shipServicePage() {
 		return "master/ship_service";
+	}
+
+	@RequestMapping("/ship_status")
+	public String shipStatusPage() {
+		return "master/ship_status";
 	}
 
 	/**

@@ -28,6 +28,7 @@ myApp.controller("productCtrl", function($scope, $http) {
     
     // Register product
 	$scope.product = {
+			'code' : '',
 			'pname' : '',
 			'price' : '',
 			'priceSale' : '',

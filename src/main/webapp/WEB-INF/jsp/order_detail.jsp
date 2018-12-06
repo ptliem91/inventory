@@ -64,7 +64,7 @@
 							<table class="table mb-0">
 								<thead class="bg-light">
 									<tr>
-										<th colspan="8">
+										<th colspan="10">
 											<input ng-model="searchText" type="text"
 											class="form-control"
 											placeholder="Search..." />
@@ -73,28 +73,44 @@
 									<tr>
 										<th>S.NO.</th>
 										<th>Order ID</th>
-										<th>Customer Name</th>
-										<th>Order Type</th>
+										<th>Customer</th>
+										<th>Type</th>
 										<th>Order Date</th>
-										<th>Amout (TK)</th>
+										<th>Amount (TK)</th>
 										<th>Ship Service</th>
-										<th>Display Order Details</th>
+										<th>Ship Status</th>
+										<th>Display Details</th>
+										<th>Update Ship Status</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr
-										ng-repeat="order in orders | filter:searchText | limitTo:limit">
+									<tr ng-repeat="order in orders | filter:searchText | limitTo:limit">
 										<td>{{$index + 1}}</td>
 										<td>{{order.oid}}</td>
-										<td>{{order.cid}}</td>
+										<td ng-repeat="customer in customers | filter:{ cid: order.cid}" >{{customer.cname}}</td>
 										<td>{{order.orderType}}</td>
-										<td>{{order.orderDate}}</td>
-										<td>{{order.total}}</td>
+										<td>{{order.orderDate | date:"dd/MM/yyyy"}}</td>
+										<td>{{order.total  | currency:"":0}}</td>
 										<td ng-repeat="shipService in shipServices | filter: order.shipService" >{{shipService.name}}</td>
+										<td ng-repeat="shipStatus in shipStatuses | filter:{ id: order.shipStatus}" 
+											ng-class="{	'bg-info text-white' : order.shipStatus == 2, 
+														'bg-warning text-white' : order.shipStatus == 3,
+														'bg-success text-white' : order.shipStatus == 4,
+														'bg-danger text-white' : order.shipStatus == 5
+														}" >
+											{{shipStatus.status}}
+										</td>
 										<td>
 											<button ng-click="findOd(order)" type="button"
 												class="btn btn-default">
 												<i class="fa fa-search-plus"></i>
+											</button>
+										</td>
+										<td>
+											<button class="btn btn-primary" ng-click="setSelectedOd(order)"
+											        ng-bootbox-custom-dialog="Choose Status will use to update for this order (Order ID: {{order.oid}})"
+											        ng-bootbox-buttons="customDialogButtons">
+											    Update Ship Status
 											</button>
 										</td>
 									</tr>
@@ -137,9 +153,9 @@
 									<tr ng-repeat="od in orderDetails">
 										<td>{{od.odid}}</td>
 										<td>{{od.pid}}</td>
-										<td>{{od.price}}</td>
-										<td>{{od.qty}}</td>
-										<td>{{od.price * od.qty}}</td>
+										<td>{{od.price  | currency:"":0}}</td>
+										<td>{{od.qty  | currency:"":0}}</td>
+										<td>{{od.price * od.qty  | currency:"":0}}</td>
 									</tr>
 								</tbody>
 							</table>

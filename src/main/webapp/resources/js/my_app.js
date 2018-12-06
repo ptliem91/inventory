@@ -53,6 +53,22 @@ myApp
 					};
 					// call method to get all Ship Service
 					$scope.getAllShipService();
+					
+					// get All Ship Status
+					$scope.shipStatuses = [];
+					$scope.getAllShipStatus = function() {
+						$http({
+							method : 'GET',
+							url : 'master/allShipStatus'
+						}).then(function(response) {
+							$scope.shipStatuses = response.data;
+							
+						}, function(error){
+				            console.log(error); //
+				        });
+					};
+					// call method to get all Ship Status
+					$scope.getAllShipStatus();
 
 					// order logic control
 					$scope.qty = 0;
@@ -116,7 +132,8 @@ myApp
 							'total' : '',
 							'orderType' : '',
 							'orderDate' : '',
-							'shipService' : ''
+							'shipService' : '',
+							'shipStatus' : ''
 						};
 
 						// make order perform
@@ -125,6 +142,7 @@ myApp
 						$scope.order.orderType = $scope.orderType;
 						$scope.order.orderDate = $scope.orderDate;
 						$scope.order.shipService = $scope.shipService;
+						$scope.order.shipStatus = $scope.shipStatus;
 
 						$http({
 							method : 'POST',
@@ -286,6 +304,35 @@ myApp.controller("orderDetailsChartCtrl", function($scope, $http) {
 	};
 	// call method to get all Ship Service
 	$scope.getAllShipService();
+	
+	// get All Ship Status
+	$scope.shipStatuses = [];
+	$scope.getAllShipStatus = function() {
+		$http({
+			method : 'GET',
+			url : 'master/allShipStatus'
+		}).then(function(response) {
+			$scope.shipStatuses = response.data;
+			
+		}, function(error){
+            console.log(error); //
+        });
+	};
+	// call method to get all Ship Status
+	$scope.getAllShipStatus();
+	
+	// get All Customer
+	$scope.customers = [];
+	$scope.getAllCustomer = function() {
+		$http({
+			method : 'GET',
+			url : 'customers/allCustomer'
+		}).then(function(response) {
+			$scope.customers = response.data;
+		});
+	};
+	// call method to get all Customer
+	$scope.getAllCustomer();
 
 	// get order details info by order id
 	$scope.clickedItem = {};
@@ -307,5 +354,59 @@ myApp.controller("orderDetailsChartCtrl", function($scope, $http) {
       var increamented = $scope.limit + 10;
       $scope.limit = increamented > $scope.orders.length ? $scope.orders.length : increamented;
     };
+    
+    // 
+    $scope.setSelectedOd = function(order) {
+		$scope.clickedItem = order;
+	};
+    $scope.customDialogButtons = {
+            main: {
+                label: "Thất Bại!",
+                className: "bg-danger",
+                callback: function() {
+                	$scope.updateShipStatusOd($scope.clickedItem, 5);
+                }
+            },
+            danger: {
+            	label: "Thành Công",
+            	className: "bg-success",
+            	callback: function() {
+                	$scope.updateShipStatusOd($scope.clickedItem, 4);
+            	}
+            },
+            success: {
+                label: "Đã Gửi",
+                className: "bg-warning",
+                callback: function() {
+                	$scope.updateShipStatusOd($scope.clickedItem, 3);
+                }
+            },
+            warning: {
+                label: "Chưa Gửi",
+                className: "bg-info",
+                callback: function() {
+                	$scope.updateShipStatusOd($scope.clickedItem, 2);
+                }
+            }
+    };
+    
+    $scope.updateShipStatusOd = function(order, status) {
+    	var orderUpdate  = order;
+    	orderUpdate.shipStatus = status;
+    	
+		$http({
+			method : 'PUT',
+			url : 'orders/updateOrder',
+			data : angular.toJson(orderUpdate)
+			
+		}).then(function(response) {
+			$scope.os = 1;
+			
+			$scope.getAllOrders();			
+			
+		}, function(reason) {
+			$scope.oe = 0;
+		});
+	};
 
 });
