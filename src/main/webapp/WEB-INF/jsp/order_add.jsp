@@ -13,9 +13,9 @@
 <title>Add Order</title>
 </head>
 
-<body ng-controller="appCtrl" class="h-100">
+<body ng-controller="appCtrl" class="bg02">
 
-	<div id="container-fluid">
+	<div class="container-fluid">
 		<div class="row">
 
 			<!-- MENU SIDEBAR-->
@@ -79,6 +79,31 @@
 									type="date" class="form-control" />
 							</div>
 							
+							<div class="mt-2" style="text-align: center;">
+								<i class="fa fa-user-circle"></i> Select Customer
+							</div>
+
+							<div class="card-body text-secondary">
+								<label for="Customer Name">Customer Name:</label> <select
+									name="cname" class="form-control" ng-model="clickedCustomer"
+									ng-options="customer.cname for customer in customers">
+								</select>
+							</div>
+							<div class="card-body text-secondary">
+								<label for="cid">Customer ID: </label> <input readonly="1"
+									name="cid" type="text" class="form-control" id="cid"
+									value="{{clickedCustomer.cid}}">
+							</div>
+							<div class="card-body text-secondary">
+								<label for="phone">Phone: </label> <input readonly="1"
+									name="phone" type="text" class="form-control" id="phone"
+									value="{{clickedCustomer.phone}}">
+							</div>
+							
+							<div class="mt-2" style="text-align: center;">
+								<i class="fa fa-truck"></i> Select Ship
+							</div>
+							
 							<div class="card-body text-secondary">
 								<label for="shipService">Ship Service</label>
 								<select name="shipService" class="form-control" ng-model="shipService">
@@ -98,11 +123,12 @@
 							</div>
 						</div>
 					</div>
-
+					
+					<!-- Select Product -->
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 						<div class="card card-small mb-4">
 							<div class="mt-2" style="text-align: center;">
-								<i class="fa fa-truck"></i> Select Product
+								<i class="fa fa-heart"></i> Select Product
 							</div>
 
 							<div class="card-body text-secondary">
@@ -130,57 +156,33 @@
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-						<div class="card card-small mb-4">
+					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">						
+						<div class="card card-small mb-4" ng-show="clickedProduct.pid != null">
 							<div class="mt-2" style="text-align: center;">
-								<i class="fa fa-user-circle"></i> Select Customer
+								<i class="fa fa-chart-bar"></i> Order Details
 							</div>
-
-							<div class="card-body text-secondary">
-								<label for="Customer Name">Customer Name:</label> <select
-									name="cname" class="form-control" ng-model="clickedCustomer"
-									ng-options="customer.cname for customer in customers">
-								</select>
+	
+							<div class="card-body" ng-show="clickedProduct.pid != null">
+								<label for="qty">Quantity:</label>
+								<input readonly="1"
+									name="orderQty" ng-model="qty" ng-init="qty = 1"
+									type="text" class="form-control" id="qty" placeholder="Enter Quantity">
 							</div>
-							<div class="card-body text-secondary">
-								<label for="cid">Customer ID: </label> <input readonly="1"
-									name="cid" type="text" class="form-control" id="cid"
-									value="{{clickedCustomer.cid}}">
+							<div class="card-body"
+								ng-show="qty != 0 && clickedProduct.pid != null">
+								<label for="total">Total:</label> <input readonly="1"
+									name="total" value="{{clickedProduct.price * qty}}" type="text"
+									class="form-control" id="total">
 							</div>
-							<div class="card-body text-secondary">
-								<label for="phone">Phone: </label> <input readonly="1"
-									name="phone" type="text" class="form-control" id="phone"
-									value="{{clickedCustomer.phone}}">
+							<div class="card-body"
+								ng-show="clickedProduct.pid != null && clickedCustomer.cid != null">
+								<button ng-click="addToCart()" type="submit"
+									class="btn btn-success">
+									<i class="fa fa-cart-plus"></i> Add To Cart
+								</button>
 							</div>
 						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-8 col-md-12 col-sm-12 mb-4">
-					<div class="card card-small mb-4" ng-show="clickedProduct.pid != null">
-						<div class="mt-2" style="text-align: center;">
-							<i class="fa fa-chart-bar"></i> Order Details
-						</div>
-
-						<div class="card-body" ng-show="clickedProduct.pid != null">
-							<label for="qty">Quantity:</label>
-							<input readonly="1"
-								name="orderQty" ng-model="qty" ng-init="qty = 1"
-								type="text" class="form-control" id="qty" placeholder="Enter Quantity">
-						</div>
-						<div class="card-body"
-							ng-show="qty != 0 && clickedProduct.pid != null">
-							<label for="total">Total:</label> <input readonly="1"
-								name="total" value="{{clickedProduct.price * qty}}" type="text"
-								class="form-control" id="total">
-						</div>
-						<div class="card-body"
-							ng-show="clickedProduct.pid != null && clickedCustomer.cid != null">
-							<button ng-click="addToCart()" type="submit"
-								class="btn btn-success">
-								<i class="fa fa-cart-plus"></i> Add To Cart
-							</button>
-						</div>
+						
 					</div>
 				</div>
 

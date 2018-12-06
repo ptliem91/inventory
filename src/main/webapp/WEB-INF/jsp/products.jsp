@@ -13,16 +13,15 @@
 <title>Product List</title>
 </head>
 
-<body ng-controller="productCtrl" class="h-100">
-	<div id="container-fluid">
+<body ng-controller="productCtrl" class="bg02">
+	<div class="container-fluid">
 		<div class="row">
 			<!-- MENU SIDEBAR-->
 			<%@ include file="menu.jsp"%>
 			<!-- END MENU SIDEBAR-->
 
 			<!-- PAGE CONTAINER-->
-			<main
-				class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+			<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
 			<div class="main-content-container container-fluid px-4">
 
 				<!-- Page Header -->

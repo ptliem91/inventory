@@ -13,8 +13,8 @@
 <title>Customer List</title>
 </head>
 
-<body ng-controller="customerCtrl" class="h-100">
-	<div id="container-fluid">
+<body ng-controller="customerCtrl" class="bg02">
+	<div class="container-fluid">
 		<div class="row">
 
 			<!-- MENU SIDEBAR-->

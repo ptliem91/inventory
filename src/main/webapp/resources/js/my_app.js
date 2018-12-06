@@ -3,12 +3,14 @@ var myApp = angular.module("myApp", ['ngBootbox']);
 myApp
 		.controller(
 				"appCtrl",
-				function($scope, $http) {
+				function($scope, $http, $ngBootbox) {
 
 					$scope.oid = "";
 					$scope.orderType = "sell";
 					$scope.orderDate = new Date();
 					$scope.finalTotal = 0;
+					$scope.shipStatus = "2"; // Đã gửi
+					$scope.shipService = "1"; // GHTK
 
 					// get All Product
 					$scope.products = [];
@@ -92,7 +94,10 @@ myApp
 						} else if ($scope.cartProduct.length > 0) {
 							for (var i = 0; i < $scope.cartProduct.length; i++) {
 								if ($scope.cartProduct[i].pid === $scope.cp.pid) {
-									alert("Item already available in Cart");
+									$ngBootbox.alert('Product ( ' + $scope.cartProduct[i].pname + ' ) already available in Cart!')
+								    	.then(function() {
+								    		console.log('Alert closed');
+								    });
 									break;
 								}
 							}
@@ -291,6 +296,19 @@ myApp.controller("orderDetailsChartCtrl", function($scope, $http) {
 	};
 	// call method to get all orders info
 	$scope.getAllOrders();
+	
+	// get All Product
+	$scope.products = [];
+	$scope.getAllProduct = function() {
+		$http({
+			method : 'GET',
+			url : 'products/allProduct'
+		}).then(function(response) {
+			$scope.products = response.data;
+		});
+	};
+	// call method to get all products
+	$scope.getAllProduct();
 	
 	// get All Ship Service
 	$scope.shipServices = [];
