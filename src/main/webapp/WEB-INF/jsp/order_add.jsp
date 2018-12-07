@@ -55,8 +55,13 @@
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 						<div class="card card-small mb-4">
+						
+							<div class="mt-2" style="text-align: center;">
+								<i class="fa fa-shopping-cart"></i> Order
+							</div>
+							
 							<div class="card-body text-secondary">
-								Order No 
+								<label for="oid">Order No </label>
 								<input name="oid" type="text" class="form-control"
 									ng-model="oid" value="${orderNo}" ng-init="oid = ${orderNo}" readonly="1"/>
 							</div>
@@ -74,7 +79,7 @@
 								</div>
 							</div> -->
 							<div class="card-body text-secondary">
-								Order Date: 
+								<label for="orderDate">Order Date</label>
 								<input ng-model="orderDate" name="orderDate"
 									type="date" class="form-control" />
 							</div>
@@ -84,13 +89,14 @@
 							</div>
 
 							<div class="card-body text-secondary">
-								<label for="Customer Name">Customer Name:</label> <select
+								<label for="Customer Name">Customer Name</label>
+								<select
 									name="cname" class="form-control" ng-model="clickedCustomer"
 									ng-options="customer.cname for customer in customers">
 								</select>
 							</div>
 							<div class="card-body text-secondary">
-								<label for="cid">Customer ID: </label> <input readonly="1"
+								<label for="cid">Customer ID</label> <input readonly="1"
 									name="cid" type="text" class="form-control" id="cid"
 									value="{{clickedCustomer.cid}}">
 							</div>
@@ -133,57 +139,55 @@
 
 							<div class="card-body text-secondary">
 								<label for="Product Name">Product Name</label> 
-								<select
-									name="pname" class="form-control" ng-model="clickedProduct"
+								<select	name="pname" class="form-control" ng-model="clickedProduct" ng-change="setPriceSale()"
 									ng-options="product.pname for product in products">
 								</select>
 							</div>
 							<div class="card-body text-secondary">
-								<label for="pid">Product ID </label> <input readonly="1"
+								<label for="pid">Product ID </label> 
+								<input readonly="1"
 									name="pid" type="text" class="form-control" id="pid"
 									value="{{clickedProduct.pid}}">
 							</div>
+							
 							<div class="card-body text-secondary">
-								<label for="price">Price </label> <input readonly="1"
+								<label for="price">Price </label>
+								<input readonly="1"
 									name="price" type="text" class="form-control" id="price"
 									value="{{clickedProduct.price}}">
 							</div>
+							
 							<div class="card-body text-secondary">
-								<label for="qty">Stock </label> <input readonly="1" name="qty"
-									type="text" class="form-control" id="qty"
+								<label for="priceSaleProd">Price Sale</label>
+								<input ng-model="priceSaleProd"  ng-model-options="{ updateOn: 'blur' }" 
+									name="priceSaleProd" type="text" class="form-control" id="priceSaleProd"
+									value="priceSaleProd" />
+							</div>
+							
+							<div class="card-body text-secondary">
+								<label for="qty">Stock </label> 
+								<input name="qty" readonly="1"
+									type="text" class="form-control" id="qtyProd"
 									value="{{clickedProduct.qty}}">
 							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">						
-						<div class="card card-small mb-4" ng-show="clickedProduct.pid != null">
-							<div class="mt-2" style="text-align: center;">
-								<i class="fa fa-chart-bar"></i> Order Details
-							</div>
-	
+							
 							<div class="card-body" ng-show="clickedProduct.pid != null">
-								<label for="qty">Quantity:</label>
-								<input readonly="1"
+								<label for="qty">Quantity</label>
+								<input ng-change="calTotal()" ng-model-options="{ updateOn: 'blur' }" 
 									name="orderQty" ng-model="qty" ng-init="qty = 1"
-									type="text" class="form-control" id="qty" placeholder="Enter Quantity">
+									type="number" class="form-control" id="qty" placeholder="Enter Quantity">
 							</div>
+							
 							<div class="card-body"
-								ng-show="qty != 0 && clickedProduct.pid != null">
-								<label for="total">Total:</label> <input readonly="1"
-									name="total" value="{{clickedProduct.price * qty}}" type="text"
-									class="form-control" id="total">
-							</div>
-							<div class="card-body"
-								ng-show="clickedProduct.pid != null && clickedCustomer.cid != null">
-								<button ng-click="addToCart()" type="submit"
-									class="btn btn-success">
+								ng-show="clickedProduct.pid != null && clickedCustomer.cid != null && priceSaleProd != '' && priceSaleProd != 0">
+								<button ng-click="addToCart()"	class="btn btn-success">
 									<i class="fa fa-cart-plus"></i> Add To Cart
 								</button>
 							</div>
+							
 						</div>
-						
 					</div>
+
 				</div>
 
 				<div class="col-md-12" style="text-align: center; margin-top: 20px;">
@@ -202,16 +206,21 @@
 										<th>S.No</th>
 										<th>Product Name</th>
 										<th>Price</th>
+										<th>Price Sale</th>
 										<th>Quantity</th>
 										<th>Action</th>
-										<th>Total</th>
+										<th>Total Sale</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="product in cartProduct">
 										<td>{{$index + 1}}</td>
 										<td>{{product.pname}}</td>
-										<td>{{product.price}}</td>
+										<td>{{product.price | currency:"":0}}</td>
+										<td ng-class="{'bg-warning text-white' : product.price == product.priceSale,
+														'bg-danger text-white' : product.price > product.priceSale}">
+											{{product.priceSale | currency:"":0}}
+										</td>
 										<td>
 											<button type="button" ng-click="decreaseQty(product)"
 												class="btn btn-danger">
@@ -226,13 +235,13 @@
 												class="btn btn-danger">
 												<i class="fa fa-remove"></i> Remove
 											</button></td>
-										<td>{{product.subTotal}}</td>
+										<td>{{product.subTotal | currency:"":0}}</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr ng-show="cartProduct.length != 0">
-										<td colspan="5" style="text-align: right">Final Total:</td>
-										<td>{{finalTotal}}</td>
+										<td colspan="5" style="text-align: right">Final Total Sale:</td>
+										<td  class="font-weight-bold">{{finalTotal | currency:"":0}}</td>
 									</tr>
 									<tr ng-show="cartProduct.length != 0">
 										<td colspan="6" style="text-align: right">
@@ -281,7 +290,7 @@
 								</tr>
 								<tr>
 									<td>Order Date</td>
-									<td>{{orderDate| date}}</td>
+									<td>{{orderDate | date:"dd/MM/yyyy"}}</td>
 								</tr>
 								<tr>
 									<td>Customer ID</td>
@@ -289,29 +298,41 @@
 								</tr>
 								<tr>
 									<td>Total Amount</td>
-									<td>{{finalTotal}}</td>
+									<td class="font-weight-bold">{{finalTotal | currency:"":0}}</td>
 								</tr>
 							</table>
-							<br /> <br /> <br /> Order Details: <br />
+							<br /><p class="text-primary">Order Details</p>
 							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th>NO</th>
 										<th>Product Name</th>
-										<th>Price</th>
+										<th>Price Sale</th>
 										<th>Qty</th>
-										<th>Total</th>
+										<th>Total Sale</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="product in cartProduct">
 										<td>{{$index + 1}}</td>
 										<td>{{product.pname}}</td>
-										<td>{{product.price}}</td>
+										<td>{{product.priceSale | currency:"":0}}</td>
 										<td>{{product.cartQty}}</td>
-										<td>{{product.price * product.qty}}</td>
+										<td class="font-weight-bold">{{product.priceSale * product.qty | currency:"":0}}</td>
 									</tr>
 								</tbody>
+							</table>
+							
+							<br /><p class="text-info">Ship Details</p>
+							<table class="table table-bordered table-striped">
+								<tr>
+									<td>Ship Service</td>
+									<td ng-repeat="shipSer in shipServices | filter:{ id: shipService}" >{{shipSer.name}}</td>
+								</tr>
+								<tr>
+									<td>Ship Status</td>
+									<td ng-repeat="shipSta in shipStatuses | filter:{ id: shipStatus}">{{shipSta.status}}</td>
+								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">

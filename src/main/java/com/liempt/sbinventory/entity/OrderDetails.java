@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "orderdetails")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class OrderDetails {
 
 	@Id
@@ -28,19 +28,11 @@ public class OrderDetails {
 	@Column
 	private double price;
 
+	@Column(name = "price_sale")
+	private double priceSale;
+
 	@Column
 	private int qty;
-
-	public OrderDetails() {
-	}
-
-	public OrderDetails(Integer odid, int oid, int pid, double price, int qty) {
-		this.odid = odid;
-		this.oid = oid;
-		this.pid = pid;
-		this.price = price;
-		this.qty = qty;
-	}
 
 	public Integer getOdid() {
 		return odid;
@@ -74,6 +66,20 @@ public class OrderDetails {
 		this.price = price;
 	}
 
+	/**
+	 * @return the priceSale
+	 */
+	public double getPriceSale() {
+		return priceSale;
+	}
+
+	/**
+	 * @param priceSale the priceSale to set
+	 */
+	public void setPriceSale(double priceSale) {
+		this.priceSale = priceSale;
+	}
+
 	public int getQty() {
 		return qty;
 	}
@@ -81,11 +87,4 @@ public class OrderDetails {
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
-
-	@Override
-	public String toString() {
-		return "OrderDetails{" + "odid=" + odid + ", oid=" + oid + ", pid=" + pid + ", price=" + price + ", qty=" + qty
-				+ '}';
-	}
-
 }

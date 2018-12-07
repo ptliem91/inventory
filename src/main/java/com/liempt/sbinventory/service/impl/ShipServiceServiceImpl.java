@@ -48,7 +48,7 @@ public class ShipServiceServiceImpl implements ShipServiceService {
 
 	@Override
 	public List<ShipService> getAllShipServices() {
-		return shipServiceRepository.findAll(Sort.by(Direction.ASC, "id"));
+		return shipServiceRepository.findAll(Sort.by(Direction.DESC, "id"));
 	}
 
 	@Override

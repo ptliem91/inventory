@@ -90,7 +90,7 @@
 											<td ng-repeat="customer in customers | filter:{ cid: order.cid}" >{{customer.cname}}</td>
 											<td>{{order.orderType}}</td>
 											<td>{{order.orderDate | date:"dd/MM/yyyy"}}</td>
-											<td>{{order.total  | currency:"":0}}</td>
+											<td class="font-weight-bold">{{order.total  | currency:"":0}}</td>
 											<td ng-repeat="shipService in shipServices | filter: order.shipService" >{{shipService.name}}</td>
 											<td ng-repeat="shipStatus in shipStatuses | filter:{ id: order.shipStatus}" 
 												ng-class="{	'bg-info text-white' : order.shipStatus == 2, 
@@ -147,8 +147,9 @@
 											<th>ID</th>
 											<th>Product Name</th>
 											<th>Price (VNĐ)</th>
+											<th>Price Sale (VNĐ)</th>
 											<th>Quantity</th>
-											<th>Total (VNĐ)</th>
+											<th>Total Sale (VNĐ)</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -156,8 +157,12 @@
 											<td>{{od.odid}}</td>
 											<td ng-repeat="product in products | filter:{ pid: od.pid}" >{{product.pname}}</td>
 											<td>{{od.price  | currency:"":0}}</td>
+											<td ng-class="{'text-warning' : od.price == od.priceSale,
+															'text-danger' : od.price > od.priceSale}">
+												{{od.priceSale  | currency:"":0}}
+											</td>
 											<td>{{od.qty  | currency:"":0}}</td>
-											<td>{{od.price * od.qty  | currency:"":0}}</td>
+											<td class="font-weight-bold">{{od.priceSale * od.qty  | currency:"":0}}</td>
 										</tr>
 									</tbody>
 								</table>

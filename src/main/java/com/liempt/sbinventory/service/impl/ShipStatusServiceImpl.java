@@ -48,7 +48,7 @@ public class ShipStatusServiceImpl implements ShipStatusService {
 
 	@Override
 	public List<ShipStatus> getAllShipStatuss() {
-		return shipStatusRepository.findAll(Sort.by(Direction.ASC, "id"));
+		return shipStatusRepository.findAll(Sort.by(Direction.DESC, "id"));
 	}
 
 	@Override

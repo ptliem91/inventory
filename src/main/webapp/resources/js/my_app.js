@@ -75,20 +75,41 @@ myApp
 					// order logic control
 					$scope.qty = 0;
 					$scope.total = 0;
+					$scope.priceSaleProd = 0;
+					
+					// Cal total
+					$scope.setPriceSale = function() {
+						$scope.priceSaleProd = $scope.clickedProduct.priceSale;
+//						$scope.calTotal();
+					};
+					
+//					$scope.calTotal = function() {
+//						if($scope.qty > $scope.clickedProduct.qty){
+//							$ngBootbox.alert('Stock of this product ( ' + $scope.clickedProduct.pname + ' ) is not enough!')
+//							.then(function() {
+//								$scope.total = 0;
+//							});
+//						}else{					
+//							$scope.total = $scope.priceSaleProd * $scope.qty;
+//						}
+//					};
 
-					// add to cart
+					// Add to cart
 					$scope.cartProduct = [];
 					$scope.finalTotal = 0;
 					$scope.addToCart = function() {
 
 						$scope.cp = {};
 						$scope.cp = $scope.clickedProduct;
-						$scope.cp.cartQty = 1;
-						$scope.cp.subTotal = $scope.cp.cartQty
-								* $scope.cp.price;
+						
+						$scope.cp.cartQty = $scope.qty;
+						$scope.cp.subTotal = $scope.cp.cartQty * $scope.priceSaleProd;
 
 						if ($scope.cartProduct.length === 0) {
 							$scope.cartProduct.push($scope.cp);
+							// Get price sale changed
+							$scope.cartProduct[0].priceSale = $scope.priceSaleProd;
+							
 							$scope.finalTotal += $scope.cp.subTotal;
 							// alert("first insert");
 						} else if ($scope.cartProduct.length > 0) {
@@ -103,22 +124,25 @@ myApp
 							}
 							if (i === $scope.cartProduct.length) {
 								$scope.cartProduct.push($scope.cp);
+								// Get price sale changed
+								$scope.cartProduct[i].priceSale = $scope.priceSaleProd;
+								
 								$scope.finalTotal += $scope.cp.subTotal;
 							}
 						}
-
 					};
 
-					// remove from cart
+					// Remove from cart
 					$scope.rCkickedProduct = {};
 					$scope.removeProduct = function(product) {
 						$scope.removableProduct = product;
-						$scope.value = -1;
-						// alert($scope.cartProduct.indexOf($scope.rClickedProduct));
-						$scope.value = $scope.cartProduct
-								.indexOf($scope.removableProduct);
+						$scope.value = -1; // default index
+						
+						$scope.value = $scope.cartProduct.indexOf($scope.removableProduct);
 						if ($scope.value >= 0) {
 							$scope.cartProduct.splice($scope.value, 1);
+							
+							$scope.updateTotalCart($scope.qtyChangedProduct, true);
 						}
 					};
 
@@ -129,6 +153,7 @@ myApp
 							'oid' : '',
 							'pid' : '',
 							'price' : '',
+							'priceSale' : '',
 							'qty' : ''
 						};
 						$scope.order = {
@@ -141,7 +166,7 @@ myApp
 							'shipStatus' : ''
 						};
 
-						// make order perform
+						// Make order perform
 						$scope.order.cid = $scope.clickedCustomer.cid;
 						$scope.order.total = $scope.finalTotal;
 						$scope.order.orderType = $scope.orderType;
@@ -162,13 +187,13 @@ myApp
 							$scope.oe = 0;
 						});
 
-						// make order details perform
+						// Make order details perform
 						for (var i = 0; i < $scope.cartProduct.length; i++) {
 							$scope.orderDetails.oid = $scope.oid;
 							$scope.orderDetails.pid = $scope.cartProduct[i].pid;
 							$scope.orderDetails.price = $scope.cartProduct[i].price;
+							$scope.orderDetails.priceSale = $scope.cartProduct[i].priceSale;
 							$scope.orderDetails.qty = $scope.cartProduct[i].cartQty;
-							// alert("loop: " + (i + 1));
 							$http({
 								method : 'POST',
 								url : 'orderdetails/orderdetail',
@@ -185,19 +210,17 @@ myApp
 							// make product update perform
 							$scope.updatedProduct = {
 								'pid' : '',
+								'code' : '',
 								'pname' : '',
 								'price' : '',
-								'qty' : ''
+								'priceSale' : '',
+								'qty' : '',
+								'buyDate' : ''
 							};
 
 							// alert($scope.productsAgain.length);
 							for (var j = 0; j < $scope.productsAgain.length; j++) {
-								// alert("enter to loop");
 								if ($scope.productsAgain[j].pid === $scope.orderDetails.pid) {
-									// alert("product stock: " +
-									// $scope.productsAgain[i].qty);
-									// alert("cart qty: " +
-									// $scope.orderDetails.qty);
 									if ($scope.orderType === 'sell') {
 										$scope.changedQty = $scope.productsAgain[j].qty
 												- $scope.orderDetails.qty;
@@ -205,18 +228,20 @@ myApp
 										$scope.changedQty = parseInt($scope.productsAgain[j].qty)
 												+ parseInt($scope.orderDetails.qty);
 									}
-									// alert("changable qty: " +
-									// $scope.changedQty);
+									
 									$scope.updatedProduct.pid = $scope.productsAgain[j].pid;
+									$scope.updatedProduct.code = $scope.productsAgain[j].code;
 									$scope.updatedProduct.pname = $scope.productsAgain[j].pname;
 									$scope.updatedProduct.price = $scope.productsAgain[j].price;
+									$scope.updatedProduct.priceSale = $scope.productsAgain[j].priceSale;
 									$scope.updatedProduct.qty = $scope.changedQty;
+									$scope.updatedProduct.buyDate = $scope.productsAgain[j].buyDate;
 								}
 							}
 
 							$http({
 								method : 'PUT',
-								url : 'products/product',
+								url : 'products/updateProduct',
 								data : angular.toJson($scope.updatedProduct),
 								headers : {
 									'Content-Type' : 'application/json'
@@ -228,10 +253,9 @@ myApp
 							});
 
 						}
-
 					};
 
-					// safty
+					// Safty
 					$scope.productsAgain = [];
 					$scope.productAgainRequest = function() {
 						$http({
@@ -243,22 +267,12 @@ myApp
 					};
 					$scope.productAgainRequest();
 
-					// increase and decrease cart product qty
+					// Increase and Decrease cart product qty
 					$scope.increaseQty = function(product) {
-						// alert("hi");
 						$scope.qtyChangedProduct = product;
 						$scope.qtyChangedProduct.cartQty = parseInt($scope.qtyChangedProduct.cartQty) + 1;
-						for (var i = 0; i < $scope.cartProduct.length; i++) {
-							if ($scope.cartProduct[i].pid === $scope.qtyChangedProduct.pid) {
-								$scope.cartProduct[i].cartQty = $scope.qtyChangedProduct.cartQty;
-							}
-						}
-
-						$scope.finalTotal = 0;
-						for (var i = 0; i < $scope.cartProduct.length; i++) {
-							$scope.finalTotal = $scope.finalTotal
-									+ ($scope.cartProduct[i].price * $scope.cartProduct[i].cartQty);
-						}
+						
+						$scope.updateTotalCart($scope.qtyChangedProduct, false);
 					};
 
 					$scope.decreaseQty = function(product) {
@@ -267,16 +281,24 @@ myApp
 						if ($scope.qtyChangedProduct.cartQty < 1) {
 							$scope.qtyChangedProduct.cartQty = 1;
 						}
-						for (var i = 0; i < $scope.cartProduct.length; i++) {
-							if ($scope.cartProduct[i].pid === $scope.qtyChangedProduct.pid) {
-								$scope.cartProduct[i].cartQty = $scope.qtyChangedProduct.cartQty;
+						
+						$scope.updateTotalCart($scope.qtyChangedProduct, false);
+					};
+					
+					// Function >> Update total for Cart
+					$scope.updateTotalCart = function(changedProduct, isRemove) {
+						if(!isRemove){
+							for (var i = 0; i < $scope.cartProduct.length; i++) {
+								if ($scope.cartProduct[i].pid === changedProduct.pid) {
+									$scope.cartProduct[i].cartQty = changedProduct.cartQty;
+									$scope.cartProduct[i].subTotal = $scope.cartProduct[i].priceSale * $scope.cartProduct[i].cartQty;
+								}
 							}
-						}
+						}					
 
 						$scope.finalTotal = 0;
 						for (var i = 0; i < $scope.cartProduct.length; i++) {
-							$scope.finalTotal = $scope.finalTotal
-									+ ($scope.cartProduct[i].price * $scope.cartProduct[i].cartQty);
+							$scope.finalTotal = $scope.finalTotal + ($scope.cartProduct[i].priceSale * $scope.cartProduct[i].cartQty);
 						}
 					};
 

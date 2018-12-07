@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> getAllCustomers() {
-		return customerRepository.findAll(Sort.by(Direction.ASC, "cid"));
+		return customerRepository.findAll(Sort.by(Direction.DESC, "cid"));
 	}
 
 	@Override

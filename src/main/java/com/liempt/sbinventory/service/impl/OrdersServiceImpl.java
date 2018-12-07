@@ -50,7 +50,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public List<Orders> getAllOrders() {
-		return ordersRepository.findAll(Sort.by(Direction.ASC, "oid"));
+		return ordersRepository.findAll(Sort.by(Direction.DESC, "oid"));
 	}
 
 	@Override
