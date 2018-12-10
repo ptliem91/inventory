@@ -8,7 +8,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 <head>
 <%@ include file="header.jsp"%>
 
@@ -17,51 +17,49 @@
 <title>Home</title>
 
 </head>
-<body ng-controller="appCtrl">
-
-	<div class="container mt-2">
-		<div class="login-form">
-			<div class="main-div">
-				<a href="<%=request.getContextPath()%>/">
-					<h2>Perfect Perfume</h2>
-				</a>
-				<p></p>
-				<c:if test="${em != null}">
-					<div class="alert alert-danger alert-dismissable">
+<body>
+	<div class="container">
+	    <div class="row">
+	      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+	        <div class="card card-signin my-5">
+	          <div class="card-body">
+	            <h5 class="card-title text-center">Inventory</h5>
+	            
+	            <c:if test="${em != null}">
+					<div class="alert alert-danger alert-dismissable" style="border-radius: 1.5em">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Error!</strong> ${em}
+						${em}
 					</div>
 				</c:if>
-
-				<form id="Login" action="<%=request.getContextPath()%>/loginCheck"
-					method="post">
-
-					<div class="form-group">
-
-						<input type="text" class="form-control" id="userName"
-							name="userName" placeholder="Username">
-
-					</div>
-
-					<div class="form-group">
-
-						<input type="password" class="form-control" id="password"
-							name="password" placeholder="Password">
-
-					</div>
-					<p></p>
-					<button type="submit" class="btn btn-primary">Login</button>
-				</form>
-			</div>
-		</div>
-	</div>
+	            
+	            <form id="Login" action="<%=request.getContextPath()%>/loginCheck" method="post">
+	              <div class="form-label-group">
+	                <input type="text" id="userName" name="userName" class="form-control" placeholder="Username" required autofocus>
+	                <label for="userName">Username</label>
+	              </div>
+	
+	              <div class="form-label-group">
+	                <input type="password" id="password"  name="password" class="form-control" placeholder="Password" required>
+	                <label for="password">Password</label>
+	              </div>
+	
+	              <div class="custom-control custom-checkbox mb-3">
+	                <input type="checkbox" class="custom-control-input" id="customCheck1">
+	                <label class="custom-control-label" for="customCheck1">Remember password</label>
+	              </div>
+	              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+	              
+	            </form>
+	            
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
 
 	<div class="col-md-12" style="text-align: center; margin-top: 60px;">
-		&copy; Liem Pham || <a href="https://www.youtube.com/" target="_blank">Youtube</a>
-		|| <a href="http://www.facebook.com/agaubun" target="_blank">Facebook</a>
+		&copy; Liem Pham || <a href="http://www.facebook.com/agaubun" target="_blank">Facebook</a>
 	</div>
-
-	<%@ include file="footer.jsp"%>
 
 </body>
 </html>
