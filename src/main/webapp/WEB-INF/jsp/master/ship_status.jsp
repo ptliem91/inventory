@@ -54,39 +54,42 @@
 
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-						<div class="card card-small">
-							<div class="card-header border-bottom">
-								<h6 class="m-0">
-									<i class="fa fa-chart-bar"></i> Insert Ship Status
-								</h6>
-							</div>
-
-							<div class="card-body pt-0">								
-								<div class="form-group">
-									<label for="id">Ship Status ID: </label>
-									<input ng-model="shipStatus.id"
-										value="shipStatus.id" name="id" type="text"
-										class="form-control" id="id"
-										readonly="1" />
+					
+						<form name="shipStatusForm" ng-submit="checkOnSubmit($event, shipStatus )">
+							<div class="card card-small">
+								<div class="card-header border-bottom">
+									<h6 class="m-0">
+										<i class="fa fa-chart-bar"></i> Insert Ship Status
+									</h6>
 								</div>
-
-								<div class="form-group">
-									<label for="name">Ship Service Name:</label> 
-									<input ng-model="shipStatus.status"
-										value="shipStatus.status" name="status" type="text"
-										class="form-control" id="status" />
+	
+								<div class="card-body pt-0">								
+									<div class="form-group">
+										<label for="id">Ship Status ID: </label>
+										<input ng-model="shipStatus.id"
+											value="shipStatus.id" name="id" type="text"
+											class="form-control" id="id"
+											readonly="1" />
+									</div>
+	
+									<div class="form-group">
+										<label for="name">Ship Service Name:</label> 
+										<input ng-model="shipStatus.status" ng-required="true"
+											value="shipStatus.status" name="status" type="text"
+											class="form-control required" id="status" />
+									</div>
+	
+									<button ng-show="shipStatus.id != null" type="submit" class="btn btn-warning">
+										<i class="fa fa-edit"></i> Update
+									</button>
+									
+									<button ng-show="shipStatus.id == null" type="submit" class="btn btn-success">
+										<i class="fa fa-send"></i> Add
+									</button>
+									
 								</div>
-
-								<button ng-show="shipStatus.id != null" type="submit" class="btn btn-warning"  ng-click="updateShipStatus()">
-									<i class="fa fa-edit"></i> Update
-								</button>
-								
-								<button ng-show="shipStatus.id == null" type="submit" class="btn btn-success" ng-click="addNewShipStatus()">
-									<i class="fa fa-send"></i> Add
-								</button>
-								
 							</div>
-						</div>
+						</form>
 					</div>
 
 					<div class="col-lg-8 col-md-12 col-sm-12 mb-4">
@@ -154,11 +157,7 @@
 				
 			</div>
 			
-			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-				<span class="copyright ml-auto my-auto mr-2">Copyright © 2018.
-					<a href="hhttp://shopnuochoaquyenru.com" rel="nofollow">Liti Perfume</a>
-				</span>
-			</footer>
+			<%@ include file="../footer_copyright.jsp"%>
 			
 			</main>
 		</div>

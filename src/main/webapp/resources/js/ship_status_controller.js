@@ -26,6 +26,22 @@ myApp.controller("shipStatusCtrl", function($scope, $http) {
       $scope.limit = increamented > $scope.shipStatuses.length ? $scope.shipStatuses.length : increamented;
     };
     
+    // Form submit
+    $scope.checkOnSubmit = function(event, shipStatus) {
+        if ($scope.shipStatusForm.$invalid) {
+            // Cancel submit
+            event.preventDefault();
+            return false;
+        }
+        if(shipStatus.id != null && shipStatus.id != ''){
+        	$scope.updateShipStatus(shipStatus);
+        }else{        	
+        	$scope.addNewShipStatus();
+        }
+        
+        return true;
+    }
+    
     // Register shipStatus
 	$scope.shipStatus = {
 			'code' : '',

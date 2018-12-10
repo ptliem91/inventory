@@ -60,39 +60,41 @@
 									<i class="fa fa-chart-bar"></i> Insert Address
 								</h6>
 							</div>
-
-							<div class="card-body pt-0">								
-								<div class="form-group">
-									<label for="id">City ID: </label>
-									<input ng-model="city.id"
-										value="city.id" name="id" type="text"
-										class="form-control" id="id"
-										readonly="1" />
+							
+							<form name="addressForm" ng-submit="checkOnSubmit($event, city)">
+								<div class="card-body pt-0">							
+									<div class="form-group">
+										<label for="id">City ID </label>
+										<input ng-model="city.id"
+											value="city.id" name="id" type="text"
+											class="form-control" id="id"
+											readonly="1" />
+									</div>
+									
+									<div class="form-group">
+										<label for="code">City Code</label>
+										<input maxlength="3" ng-model="city.code" ng-required="true"
+											value="city.code" name="code" type="text"
+											class="form-control required" id="code" />
+									</div>
+	
+									<div class="form-group">
+										<label for="name">City Name:</label> 
+										<input ng-model="city.name" ng-required="true"
+											value="city.name" name="name" type="text"
+											class="form-control required" id="name" />
+									</div>
+	
+									<button ng-show="city.id != null" type="submit" class="btn btn-warning">
+										<i class="fa fa-edit"></i> Update
+									</button>
+									
+									<button ng-show="city.id == null" type="submit" class="btn btn-success">
+										<i class="fa fa-send"></i> Add
+									</button>
+									
 								</div>
-								
-								<div class="form-group">
-									<label for="code">City code:</label>
-									<input maxlength="3" ng-model="city.code"
-										value="city.code" name="code" type="text"
-										class="form-control" id="code" />
-								</div>
-
-								<div class="form-group">
-									<label for="name">City Name:</label> 
-									<input ng-model="city.name"
-										value="city.name" name="name" type="text"
-										class="form-control" id="name" />
-								</div>
-
-								<button ng-show="city.id != null" type="submit" class="btn btn-warning"  ng-click="updateCity()">
-									<i class="fa fa-edit"></i> Update
-								</button>
-								
-								<button ng-show="city.id == null" type="submit" class="btn btn-success" ng-click="addNewCity()">
-									<i class="fa fa-send"></i> Add
-								</button>
-								
-							</div>
+							</form>
 						</div>
 					</div>
 
@@ -163,11 +165,7 @@
 				
 			</div>
 			
-			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-				<span class="copyright ml-auto my-auto mr-2">Copyright © 2018.
-					<a href="hhttp://shopnuochoaquyenru.com" rel="nofollow">Liti Perfume</a>
-				</span>
-			</footer>
+			<%@ include file="../footer_copyright.jsp"%>
 			
 			</main>
 		</div>

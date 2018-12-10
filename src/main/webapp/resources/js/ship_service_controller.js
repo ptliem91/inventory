@@ -26,6 +26,22 @@ myApp.controller("shipServiceCtrl", function($scope, $http) {
       $scope.limit = increamented > $scope.shipServices.length ? $scope.shipServices.length : increamented;
     };
     
+    // Form submit
+    $scope.checkOnSubmit = function(event, shipService) {
+        if ($scope.shipServiceForm.$invalid) {
+            // Cancel submit
+            event.preventDefault();
+            return false;
+        }
+        if(shipService.id != null && shipService.id != ''){
+        	$scope.updateShipService(shipService);
+        }else{        	
+        	$scope.addNewShipService();
+        }
+        
+        return true;
+    }
+    
     // Register shipService
 	$scope.shipService = {
 			'code' : '',

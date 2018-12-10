@@ -59,67 +59,69 @@
 									<i class="fa fa-chart-bar"></i> Insert Product
 								</h6>
 							</div>
-
-							<div class="card-body pt-0">
-								<div class="form-group">
-									<label for="pid">Product ID</label> 
-									<input ng-model="product.pid"
-										value="product.pid" name="pid" type="text"
-										class="form-control" id="pid"
-										readonly="1" />
+							
+							<form name="prodForm" ng-submit="checkOnSubmit($event, product)">
+								<div class="card-body pt-0">
+									<div class="form-group">
+										<label for="pid">Product ID</label> 
+										<input ng-model="product.pid"
+											value="product.pid" name="pid" type="text"
+											class="form-control" id="pid"
+											readonly="1" />
+									</div>
+									
+									<div class="form-group">
+										<label for="buyDate">Buy Date</label>
+										<input ng-model="product.buyDate"
+											value="product.buyDate" name="buyDate"
+											type="date" class="form-control" />
+									</div>
+									
+									<div class="form-group">
+										<label for="code">Product Code</label>
+										<input ng-model="product.code" ng-required="true"
+											maxlength="10" value="product.code" name="code" type="text"
+											class="form-control required" id="code" />										
+									</div>
+	
+									<div class="form-group">
+										<label for="pname">Product Name</label>
+										<input ng-model="product.pname" ng-required="true"
+											maxlength="100"	value="product.pname" name="pname" type="text"
+											class="form-control required" id="pname" />
+									</div>
+	
+									<div class="form-group">
+										<label for="price">Price</label>
+										<input ng-model="product.price" ng-required="true"
+											value="product.price" name="price" type="text"
+											class="form-control required" id="price" />
+									</div>
+									
+									<div class="form-group">
+										<label for="priceSale">Price Sale</label>
+										<input ng-model="product.priceSale" ng-required="true"
+											value="product.priceSale" name="priceSale" type="text"
+											class="form-control required" id="priceSale" />
+									</div>
+									
+									<div class="form-group">
+										<label for="age">Quantity</label>
+										<input ng-model="product.qty" ng-required="true"
+											maxlength="3" value="product.qty" name="qty" type="text"
+											class="form-control required" id="qty" />
+									</div>
+	
+									<button ng-show="product.pid != null" type="submit" class="btn btn-warning">
+										<i class="fa fa-edit"></i> Update
+									</button>
+									
+									<button ng-show="product.pid == null" type="submit" class="btn btn-success">
+										<i class="fa fa-send"></i> Add
+									</button>
+									
 								</div>
-								
-								<div class="form-group">
-									<label for="buyDate">Buy Date</label>
-									<input ng-model="product.buyDate"
-										value="product.buyDate" name="buyDate"
-										type="date" class="form-control" />
-								</div>
-								
-								<div class="form-group">
-									<label for="code">Product Code</label>
-									<input ng-model="product.code" maxlength="10"
-										value="product.code" name="code" type="text"
-										class="form-control" id="code" />
-								</div>
-
-								<div class="form-group">
-									<label for="pname">Product Name</label>
-									<input ng-model="product.pname" maxlength="100"
-										value="product.pname" name="pname" type="text"
-										class="form-control" id="pname" />
-								</div>
-
-								<div class="form-group">
-									<label for="price">Price</label>
-									<input ng-model="product.price"
-										value="product.price" name="price" type="text"
-										class="form-control" id="price" />
-								</div>
-								
-								<div class="form-group">
-									<label for="priceSale">Price Sale</label>
-									<input ng-model="product.priceSale"
-										value="product.priceSale" name="priceSale" type="text"
-										class="form-control" id="priceSale" />
-								</div>
-								
-								<div class="form-group">
-									<label for="age">Quantity</label>
-									<input ng-model="product.qty" maxlength="3"
-										value="product.qty" name="qty" type="text"
-										class="form-control" id="qty" />
-								</div>
-
-								<button ng-show="product.pid != null" type="submit" class="btn btn-warning"  ng-click="updateProduct()">
-									<i class="fa fa-edit"></i> Update
-								</button>
-								
-								<button ng-show="product.pid == null" type="submit" class="btn btn-success" ng-click="addNewProduct()">
-									<i class="fa fa-send"></i> Add
-								</button>
-								
-							</div>
+							</form>
 						</div>
 					</div>
 
@@ -195,11 +197,7 @@
 				
 			</div>
 			
-			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-				<span class="copyright ml-auto my-auto mr-2">Copyright © 2018.
-					<a href="hhttp://shopnuochoaquyenru.com" rel="nofollow">Liti Perfume</a>
-				</span>
-			</footer>
+			<%@ include file="footer_copyright.jsp"%>
 			
 			</main>
 		</div>

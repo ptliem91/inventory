@@ -61,57 +61,59 @@
 									<i class="fa fa-user-plus"></i> Register Customer
 								</h6>
 							</div>
-
-							<div class="card-body pt-0">
-								<div class="form-group">
-									<label for="cid">Customer ID </label> 
-									<input ng-model="customer.cid"
-										value="customer.cid" name="cid" type="text"
-										class="form-control" id="cid"
-										readonly="1">
+							
+							<form name="custForm" ng-submit="checkOnSubmit($event, customer)">
+								<div class="card-body pt-0">
+									<div class="form-group">
+										<label for="cid">Customer ID </label> 
+										<input ng-model="customer.cid"
+											value="customer.cid" name="cid" type="text"
+											class="form-control" id="cid"
+											readonly="1">
+									</div>
+	
+									<div class="form-group">
+										<label for="cname">Name:</label> 
+										<input ng-model="customer.cname" ng-required="true"
+											value="customer.cname" name="cname" type="text"
+											class="form-control required"" id="cname">
+									</div>
+	
+									<div class="form-group">
+										<label for="phone">Phone:</label>
+										<input ng-model="customer.phone" ng-required="true"
+											value="customer.phone" name="phone" type="text" maxlength="11"
+											class="form-control required"" id="phone">
+									</div>
+									
+									<div class="form-group">
+										<label for="city">City:</label>
+										<select name="city" class="form-control" ng-model="customer.cityId">
+											<option ng-repeat="city in cities" value="{{city.id}}" ng-selected="city.id == customer.cityId">
+												{{city.name}}
+											</option>
+										</select>
+									</div>
+									
+									<div class="form-group">
+										<label for="address">Address:</label>
+										<textarea rows="4" cols="50" ng-required="true" ngMaxlength="225"
+											ng-model="customer.address"
+											name="address" type="text"
+											class="form-control required" id="address">
+										</textarea>
+									</div>
+	
+									<button ng-show="customer.cid != null" type="submit" class="btn btn-warning">
+										<i class="fa fa-edit"></i> Update
+									</button>
+									
+									<button ng-show="customer.cid == null" type="submit" class="btn btn-success">
+										<i class="fa fa-send"></i> Add
+									</button>
+									
 								</div>
-
-								<div class="form-group">
-									<label for="cname">Name:</label> 
-									<input ng-model="customer.cname"
-										value="customer.cname" name="cname" type="text"
-										class="form-control" id="cname">
-								</div>
-
-								<div class="form-group">
-									<label for="phone">Phone:</label>
-									<input ng-model="customer.phone"
-										value="customer.phone" name="phone" type="text"
-										class="form-control" id="phone">
-								</div>
-								
-								<div class="form-group">
-									<label for="city">City:</label>
-									<select name="city" class="form-control" ng-model="customer.cityId">
-										<option ng-repeat="city in cities" value="{{city.id}}" ng-selected="city.id == customer.cityId">
-											{{city.name}}
-										</option>
-									</select>
-								</div>
-								
-								<div class="form-group">
-									<label for="address">Address:</label>
-									<textarea rows="4" cols="50" ng-required="true" ngMaxlength="225"
-										ng-model="customer.address"
-										name="address" type="text"
-										class="form-control" id="address">
-									</textarea>
-								</div>
-
-								<button ng-show="customer.cid != null" type="submit" class="btn btn-warning"  ng-click="updateCustomer()">
-									<i class="fa fa-edit"></i> Update
-								</button>
-								
-								<button ng-show="customer.cid == null" type="submit" class="btn btn-success" ng-click="addNewCustomer()">
-									<i class="fa fa-send"></i> Add
-								</button>
-								
-							</div>
+							</form>
 						</div>
 					</div>
 
@@ -183,11 +185,7 @@
 				</div>
 			</div>
 			
-			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-				<span class="copyright ml-auto my-auto mr-2">Copyright © 2018.
-					<a href="hhttp://shopnuochoaquyenru.com" rel="nofollow">Liti Perfume</a>
-				</span>
-			</footer>
+			<%@ include file="footer_copyright.jsp"%>
 			
 			</main>
 		</div>

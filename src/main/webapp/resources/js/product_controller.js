@@ -37,8 +37,8 @@ myApp.controller("productCtrl", function($scope, $http) {
 			'createDate' : '',
 			'updateDate' : ''
 	};
-    $scope.addNewProduct = function() {
-    	
+	
+    $scope.addNewProduct = function() {    	
     	$http({
 			method : 'POST',
 			url : 'products/addProduct',
@@ -57,6 +57,22 @@ myApp.controller("productCtrl", function($scope, $http) {
 			$scope.oe = 0;
 		});
     };
+    
+    // Form submit
+    $scope.checkOnSubmit = function(event, product) {
+        if ($scope.prodForm.$invalid) {
+            // Cancel submit
+            event.preventDefault();
+            return false;
+        }
+        if(product.pid != null && product.pid != ''){
+        	$scope.updateProduct(product);
+        }else{        	
+        	$scope.addNewProduct();
+        }
+        
+        return true;
+    }
     
     // Edit product
     $scope.editProduct = function(product) {

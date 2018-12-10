@@ -120,3 +120,8 @@
 		font-size: 122px;
 	}
 }
+
+.required {
+    border-left-color: #dc3545 !important;
+    border-left: 3px solid;
+}

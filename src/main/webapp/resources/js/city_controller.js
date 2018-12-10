@@ -25,6 +25,22 @@ myApp.controller("masterCtrl", function($scope, $http) {
       $scope.limit = increamented > $scope.cities.length ? $scope.cities.length : increamented;
     };
     
+    // Form submit
+    $scope.checkOnSubmit = function(event, city) {
+        if ($scope.addressForm.$invalid) {
+            // Cancel submit
+            event.preventDefault();
+            return false;
+        }
+        if(city.id != null && city.id != ''){
+        	$scope.updateCity(city);
+        }else{        	
+        	$scope.addNewCity();
+        }
+        
+        return true;
+    }
+    
     // Register city
 	$scope.city = {
 			'code' : '',

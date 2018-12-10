@@ -39,6 +39,22 @@ myApp.controller("customerCtrl", function($scope, $http) {
       $scope.limit = increamented > $scope.customers.length ? $scope.customers.length : increamented;
     };
     
+    // Form submit
+    $scope.checkOnSubmit = function(event, customer) {
+        if ($scope.custForm.$invalid) {
+            // Cancel submit
+            event.preventDefault();
+            return false;
+        }
+        if(customer.cid != null && customer.cid != ''){
+        	$scope.updateCustomer(customer);
+        }else{        	
+        	$scope.addNewCustomer();
+        }
+        
+        return true;
+    }
+    
     // Register customer
 	$scope.customer = {
 			'cname' : '',
