@@ -2,6 +2,7 @@ package com.liempt.sbinventory.service;
 
 import java.util.List;
 
+import com.liempt.sbinventory.dto.OrdersDto;
 import com.liempt.sbinventory.entity.Orders;
 
 public interface OrdersService {
@@ -21,4 +22,6 @@ public interface OrdersService {
 	long countOrders();
 	
 	Integer getMaxId();
+	
+	List<OrdersDto> getSumByDate();
 }

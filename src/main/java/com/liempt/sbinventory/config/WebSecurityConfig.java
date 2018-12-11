@@ -38,20 +38,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/logout").permitAll();
 
 		http.authorizeRequests() //
-				.antMatchers("/home", "/products", "/customers", "/order_detail", "/address").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-		
+				.antMatchers("/home", "/home/*", //
+						"/products", "/products/*", //
+						"/customers", "/customers/*", //
+						"/order_detail", "/order_detail/*", //
+						"/address", "/address/*", //
+						"/ship_service", "/ship_service/*", //
+						"/ship_status", "/ship_status/*")
+				.access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+
 		http.authorizeRequests() //
-		.antMatchers("/order_add").access("hasAnyRole('ROLE_ADMIN')");
+				.antMatchers("/order_add", "/order_add/*").access("hasAnyRole('ROLE_ADMIN')");
 
 		http.formLogin() //
-				.loginProcessingUrl("/loginCheck")
-				.loginPage("/") //
+				.loginProcessingUrl("/loginCheck").loginPage("/") //
 				.usernameParameter("userName") //
 				.passwordParameter("password") //
 				.defaultSuccessUrl("/home") //
 				.failureUrl("/loginFailed");
 
-		//Logout
+		// Logout
 		http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
 		http.exceptionHandling() //

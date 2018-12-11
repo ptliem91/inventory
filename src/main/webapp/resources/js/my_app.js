@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", ['ngBootbox']);
+var myApp = angular.module("myApp", ['ngBootbox', 'zingchart-angularjs']);
 
 myApp
 		.controller(
@@ -71,6 +71,19 @@ myApp
 					};
 					// call method to get all Ship Status
 					$scope.getAllShipStatus();
+					
+					// get all orders info
+					$scope.orders = [];
+					$scope.getAllOrders = function() {
+						$http({
+							method : 'GET',
+							url : 'orders/order'
+						}).then(function(response) {
+							$scope.orders = response.data;
+						});
+					};
+					// call method to get all orders info
+					$scope.getAllOrders();
 
 					// order logic control
 					$scope.qty = 0;

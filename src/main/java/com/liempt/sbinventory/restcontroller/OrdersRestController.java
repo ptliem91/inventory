@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.liempt.sbinventory.dto.OrdersDto;
 import com.liempt.sbinventory.entity.Orders;
 import com.liempt.sbinventory.service.OrdersService;
 
@@ -28,12 +29,16 @@ public class OrdersRestController {
 		ordersService.createOrders(orders);
 		return orders;
 	}
-	
+
 	@RequestMapping(value = "/updateOrder", method = RequestMethod.PUT)
 	public Orders updateProduct(@RequestBody Orders p) {
 		ordersService.editOrders(p);
 		return p;
 	}
 
+	@RequestMapping(value = "/sumByDate", method = RequestMethod.GET)
+	public List<OrdersDto> getSumByDate() {
+		return ordersService.getSumByDate();
+	}
 
 }

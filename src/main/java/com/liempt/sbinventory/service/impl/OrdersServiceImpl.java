@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.liempt.sbinventory.dto.OrdersDto;
 import com.liempt.sbinventory.entity.Orders;
 import com.liempt.sbinventory.repository.OrdersRepository;
 import com.liempt.sbinventory.service.OrdersService;
@@ -19,9 +20,9 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Autowired
 	private OrdersRepository ordersRepository;
-	
+
 	@Autowired
-    private EntityManager entityManager;
+	private EntityManager entityManager;
 
 	@Override
 	public Orders createOrders(Orders orders) {
@@ -70,10 +71,23 @@ public class OrdersServiceImpl implements OrdersService {
 		if (query.getSingleResult() == null) {
 			orderId = 1;
 		} else {
-			orderId = ((Integer)query.getSingleResult()) + 1;
+			orderId = ((Integer) query.getSingleResult()) + 1;
 		}
 
 		return orderId;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrdersDto> getSumByDate() {
+		String sql = " SELECT new " + OrdersDto.class.getName() + //
+				" (e.orderDate, sum(e.total)/1000) " + //
+				" FROM " + Orders.class.getName() + " e " + //
+				" GROUP BY e.orderDate " + //
+				" ORDER BY e.orderDate ";
+
+		Query query = entityManager.createQuery(sql, OrdersDto.class);
+		return query.getResultList();
 	}
 
 }

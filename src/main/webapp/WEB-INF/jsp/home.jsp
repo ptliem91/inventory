@@ -9,10 +9,9 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-<%@ include file="header.jsp"%>
-<title>Home</title>
+	<%@ include file="header.jsp"%>
+	<title>Home</title>
 </head>
-
 <body ng-controller="appCtrl" class="bg02">
 
 	<div class="container-fluid">
@@ -39,8 +38,8 @@
 		                  <div class="card-body p-0 d-flex">
 		                    <div class="d-flex flex-column m-auto">
 		                      <div class="stats-small__data text-center">
-		                        <span class="stats-small__label text-uppercase">Posts</span>
-		                        <h6 class="stats-small__value count my-3">2,390</h6>
+		                        <span class="stats-small__value text-uppercase">Orders</span>
+		                        <h6 class="stats-small__value count my-3">{{orders.length}}</h6>
 		                      </div>
 		                      <div class="stats-small__data">
 		                        <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
@@ -55,8 +54,8 @@
 		                  <div class="card-body p-0 d-flex">
 		                    <div class="d-flex flex-column m-auto">
 		                      <div class="stats-small__data text-center">
-		                        <span class="stats-small__label text-uppercase">Pages</span>
-		                        <h6 class="stats-small__value count my-3">182</h6>
+		                        <span class="stats-small__value text-uppercase">Customers</span>
+		                        <h6 class="stats-small__value count my-3">{{customers.length}}</h6>
 		                      </div>
 		                      <div class="stats-small__data">
 		                        <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
@@ -71,18 +70,18 @@
 		                  <div class="card-body p-0 d-flex">
 		                    <div class="d-flex flex-column m-auto">
 		                      <div class="stats-small__data text-center">
-		                        <span class="stats-small__label text-uppercase">Comments</span>
-		                        <h6 class="stats-small__value count my-3">8,147</h6>
+		                        <span class="stats-small__value text-uppercase">Products</span>
+		                        <h6 class="stats-small__value count my-3">{{products.length}}</h6>
 		                      </div>
 		                      <div class="stats-small__data">
-		                        <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
+		                        <span class="stats-small__percentage stats-small__percentage--increase">3.8%</span>
 		                      </div>
 		                    </div>
 		                    <canvas height="120" class="blog-overview-stats-small-3"></canvas>
 		                  </div>
 		                </div>
 		              </div>
-		              <div class="col-lg col-md-4 col-sm-6 mb-4">
+		              <%-- <div class="col-lg col-md-4 col-sm-6 mb-4">
 		                <div class="stats-small stats-small--1 card card-small">
 		                  <div class="card-body p-0 d-flex">
 		                    <div class="d-flex flex-column m-auto">
@@ -113,19 +112,19 @@
 		                    <canvas height="120" class="blog-overview-stats-small-5"></canvas>
 		                  </div>
 		                </div>
-		              </div>
+		              </div> --%>
 		            </div>
 		            
 		            
-		            <div class="row">
+		            <div class="row" ng-controller="zingChartCtrl">
 		              <!-- Users Stats -->
 		              <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
 		                <div class="card card-small">
 		                  <div class="card-header border-bottom">
-		                    <h6 class="m-0">Users</h6>
+		                    <h6 class="m-0">Orders by nearest week</h6>
 		                  </div>
 		                  <div class="card-body pt-0">
-		                    <div class="row border-bottom py-2 bg-light">
+		                    <!-- <div class="row border-bottom py-2 bg-light">
 		                      <div class="col-12 col-sm-6">
 		                        <div id="blog-overview-date-range" class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
 		                          <input type="text" class="input-sm form-control" name="start" placeholder="Start Date" id="blog-overview-date-range-1">
@@ -141,7 +140,8 @@
 		                        <button type="button" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</button>
 		                      </div>
 		                    </div>
-		                    <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
+		                    <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas> -->
+		                    <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="568px"></div>
 		                  </div>
 		                </div>
 		              </div>
@@ -156,5 +156,7 @@
 	</div>
 	
 	<%@ include file="footer.jsp"%>
+	<script src="/resources/js/zing_chart.js"></script>
+	
 </body>
 </html>
