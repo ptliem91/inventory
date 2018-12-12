@@ -24,4 +24,6 @@ public interface OrdersService {
 	Integer getMaxId();
 	
 	List<OrdersDto> getSumByDate();
+	
+	List<OrdersDto> getSumByMonth();
 }

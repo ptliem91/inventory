@@ -40,5 +40,10 @@ public class OrdersRestController {
 	public List<OrdersDto> getSumByDate() {
 		return ordersService.getSumByDate();
 	}
+	
+	@RequestMapping(value = "/sumByMonth", method = RequestMethod.GET)
+	public List<OrdersDto> getSumByMonth() {
+		return ordersService.getSumByMonth();
+	}
 
 }

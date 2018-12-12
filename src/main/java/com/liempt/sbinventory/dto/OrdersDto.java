@@ -20,9 +20,17 @@ public class OrdersDto extends Orders implements Serializable {
 
 	private Date orderDate;
 
-	public OrdersDto(Date orderDate, double sumByDate) {
+	private String monthYear;
+
+	public OrdersDto(double sumByDate, String monthYear) {
+		this.sumByDate = sumByDate;
+		this.monthYear = monthYear;
+	}
+	
+	public OrdersDto(Date orderDate, double sumByDate, String monthYear) {
 		this.orderDate = orderDate;
 		this.sumByDate = sumByDate;
+		this.monthYear = monthYear;
 	}
 
 	/**
@@ -51,6 +59,20 @@ public class OrdersDto extends Orders implements Serializable {
 	 */
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+
+	/**
+	 * @return the monthYear
+	 */
+	public String getMonthYear() {
+		return monthYear;
+	}
+
+	/**
+	 * @param monthYear the monthYear to set
+	 */
+	public void setMonthYear(String monthYear) {
+		this.monthYear = monthYear;
 	}
 
 }

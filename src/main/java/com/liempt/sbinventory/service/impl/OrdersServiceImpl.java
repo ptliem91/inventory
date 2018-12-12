@@ -81,10 +81,23 @@ public class OrdersServiceImpl implements OrdersService {
 	@Override
 	public List<OrdersDto> getSumByDate() {
 		String sql = " SELECT new " + OrdersDto.class.getName() + //
-				" (e.orderDate, sum(e.total)/1000) " + //
+				" (e.orderDate, sum(e.total)/1000, '' )" + //
 				" FROM " + Orders.class.getName() + " e " + //
 				" GROUP BY e.orderDate " + //
 				" ORDER BY e.orderDate ";
+
+		Query query = entityManager.createQuery(sql, OrdersDto.class);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrdersDto> getSumByMonth() {
+		String sql = " SELECT new " + OrdersDto.class.getName() + //
+				" (sum(e.total)/1000, to_char(date(e.orderDate),'YYYY-MM') )" + //
+				" FROM " + Orders.class.getName() + " e " + //
+				" GROUP BY to_char(date(e.orderDate),'YYYY-MM') " + //
+				" ORDER BY to_char(date(e.orderDate),'YYYY-MM') ";
 
 		Query query = entityManager.createQuery(sql, OrdersDto.class);
 		return query.getResultList();

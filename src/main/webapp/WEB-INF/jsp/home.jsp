@@ -145,6 +145,19 @@
 		                  </div>
 		                </div>
 		              </div>
+		            </div>
+		            
+		            <div class="row" ng-controller="ordersByMonthChartCtrl">
+		              <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+		                <div class="card card-small">
+		                  <div class="card-header border-bottom">
+		                    <h6 class="m-0">Orders by month of current year</h6>
+		                  </div>
+		                  <div class="card-body pt-0">
+		                    <div zingchart id="chart-2" zc-json="ordersByMonthJson" zc-width="100%" zc-height="568px"></div>
+		                  </div>
+		                </div>
+		              </div>
 		            </div>	
 		            	           
 				</div>
@@ -157,6 +170,7 @@
 	
 	<%@ include file="footer.jsp"%>
 	<script src="/resources/js/zing_chart.js"></script>
+	<script src="/resources/js/chart/orders_by_month.js"></script>
 	
 </body>
 </html>
